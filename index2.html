@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ms. Greene the Science Queen — Interactive STEM Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0a0f21;
+      --panel: #141a2f;
+      --accent: #66e0ff;
+      --accent2: #ff8a66;
+      --accent3: #c792ea;
+      --text: #eaf2ff;
+      --muted: #9fb3cc;
+      --good: #59d36c;
+      --warn: #f5c04e;
+      --bad: #ff6666;
+      --brand1: #242b4f;
+      --brand2: #1b2143;
+      --gold: #ffd266;
+      --purple: #7a5cff;
+      --pink: #ff78c3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, #131a33, var(--bg)),
+        linear-gradient(180deg, var(--brand1), var(--brand2));
+    }
+
+    /* Header & Branding */
+    header {
+      padding: 16px 20px;
+      position: sticky; top: 0; z-index: 60; backdrop-filter: blur(8px);
+      border-bottom: 1px solid #243252; background: rgba(10, 14, 28, 0.7);
+    }
+    .brand {
+      display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center;
+    }
+    .avatar {
+      width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
+      box-shadow: 0 0 22px #7a5cff44; border: 2px solid #7a5cff;
+      display: grid; place-items: center; background: #0f1430;
+    }
+    .avatar svg { width: 44px; height: 44px; }
+    .title-wrap h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
+    .title-wrap .subtitle { color: var(--muted); font-size: 13px; }
+    .progress-badges { display: flex; gap: 8px; align-items: center; }
+    .badge {
+      font-size: 12px; color: #0b0e1f; background: var(--gold);
+      padding: 6px 8px; border-radius: 999px; border: 1px solid #f2c44d;
+      box-shadow: 0 3px 10px rgba(255,210,102,0.25);
+    }
+    .streak {
+      font-size: 12px; color: var(--text); background: #20305f;
+      padding: 6px 8px; border-radius: 999px; border: 1px solid #3b4f8a;
+    }
+
+    .layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 88px); }
+    nav {
+      border-right: 1px solid #243252; padding: 16px; background: linear-gradient(180deg, #0e152a, #0b1020 50%);
+    }
+    .tab {
+      display: grid; grid-template-columns: 24px 1fr auto; align-items: center;
+      gap: 10px; padding: 10px 12px; margin-bottom: 6px; border-radius: 10px; cursor: pointer;
+      color: var(--text); border: 1px solid transparent;
+    }
+    .tab:hover { background: #111936; border-color: #1f2a47; }
+    .tab.active { background: #152044; border-color: #2a3a63; box-shadow: inset 0 0 0 1px #2a3a63; }
+    .tab .icon { font-size: 16px; }
+    .tab .progress-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: #223154; border: 1px solid #2a3a63;
+    }
+    .tab.done .progress-dot { background: #59d36c; border-color: #59d36c; }
+    .tab.partial .progress-dot { background: #f5c04e; border-color: #f5c04e; }
+
+    main { padding: 20px; }
+    .panel {
+      background: linear-gradient(180deg, #12172b, #101428);
+      border: 1px solid #243252; border-radius: 14px; padding: 16px; margin-bottom: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    h2 { margin: 0 0 6px; font-size: 20px; }
+    .desc { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .controls label { font-size: 13px; color: var(--muted); }
+    .btn {
+      background: #16244d; color: var(--text); border: 1px solid #2a3a63;
+      padding: 8px 10px; border-radius: 8px; cursor: pointer; font-size: 13px;
+    }
+    .btn:hover { background: #183058; }
+    .btn.primary { background: var(--purple); border-color: #5c47e6; color: white; }
+    .btn.success { background: var(--good); border-color: #3eb758; color: #0b0e1f; }
+    .btn.warn { background: var(--warn); border-color: #d6a63e; color: #0b0e1f; }
+    .btn.ghost { background: transparent; border-color: #2a3a63; }
+    .slider { width: 180px; }
+    .readout { font-size: 12px; color: var(--muted); margin-left: 6px; }
+
+    .a11y-controls { display: flex; gap: 10px; margin-bottom: 10px; }
+
+    canvas, svg { width: 100%; max-width: 960px; height: 340px; background: #0c1328; border-radius: 12px; }
+    .grid-bg {
+      background-image:
+        linear-gradient(#1b2544 1px, transparent 1px),
+        linear-gradient(90deg, #1b2544 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .legend { display: flex; gap: 12px; margin-top: 8px; font-size: 12px; color: var(--muted); }
+    .legend i { width: 12px; height: 12px; display: inline-block; border-radius: 3px; margin-right: 6px; }
+    .legend .a { background: var(--accent); }
+    .legend .b { background: var(--accent2); }
+    .legend .g { background: var(--good); }
+    .legend .w { background: var(--warn); }
+    .legend .d { background: var(--bad); }
+
+    /* Notes & Quizzes */
+    .notes {
+      display: grid; gap: 8px; border-top: 1px dashed #243252; margin-top: 14px; padding-top: 10px;
+    }
+    .note-card {
+      background: #0f1738; border: 1px solid #233055; border-radius: 10px; padding: 10px;
+    }
+    .note-card h3 { margin: 0 0 6px; font-size: 16px; }
+    .note-card p { margin: 0 0 6px; color: var(--muted); font-size: 13px; }
+    .quiz {
+      margin-top: 10px; background: #0f1738; border: 1px solid #233055; border-radius: 10px; padding: 10px;
+    }
+    .quiz h3 { margin: 0 0 6px; font-size: 16px; }
+    .quiz .q { margin-bottom: 10px; }
+    .quiz label { display: flex; align-items: center; gap: 6px; margin: 4px 0; cursor: pointer; }
+    .quiz .feedback { margin-top: 8px; font-size: 13px; }
+    .celebrate {
+      margin-top: 8px; padding: 10px; border-radius: 10px; background: #132355; border: 1px solid #2a3a63;
+      display: none;
+    }
+
+    /* Toast celebration */
+    .toast {
+      position: fixed; right: 16px; bottom: 16px;
+      background: #12193a; border: 1px solid #2a3a63; border-radius: 12px;
+      padding: 10px 12px; color: var(--text); box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      display: none; z-index: 100;
+    }
+    .toast .title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .toast .msg { font-size: 12px; color: var(--muted); }
+
+    .footer { color: var(--muted); font-size: 12px; text-align: center; padding: 12px; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      nav { border-right: none; border-bottom: 1px solid #243252; }
+      header { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header aria-label="Site header">
+    <div class="brand">
+      <div class="avatar" aria-hidden="true">
+        <!-- Simple illustrated avatar of a Black female STEM scientist -->
+        <svg viewBox="0 0 64 64" role="img" aria-label="Ms. Greene the Science Queen">
+          <defs>
+            <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2b1e16"></stop>
+              <stop offset="1" stop-color="#0f0b08"></stop>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="30" fill="#0b1020"></circle>
+          <!-- Hair -->
+          <circle cx="32" cy="26" r="18" fill="url(#hair)"></circle>
+          <!-- Face -->
+          <circle cx="32" cy="32" r="12" fill="#7b4f37"></circle>
+          <!-- Glasses -->
+          <rect x="22" y="28" width="8" height="6" rx="2" fill="#66e0ff"></rect>
+          <rect x="34" y="28" width="8" height="6" rx="2" fill="#66e0ff"></rect>
+          <rect x="30" y="30" width="4" height="2" fill="#66e0ff"></rect>
+          <!-- Lab coat -->
+          <path d="M20 44 L44 44 L40 60 L24 60 Z" fill="#eaf2ff"></path>
+          <!-- Crown -->
+          <g transform="translate(42,16)">
+            <path d="M0 8 L6 0 L12 8 L18 2 L24 8 L24 12 L0 12 Z" fill="#ffd266" stroke="#e6b84d" stroke-width="1"></path>
+          </g>
+        </svg>
+      </div>
+      <div class="title-wrap">
+        <h1>Ms. Greene the Science Queen</h1>
+        <div class="subtitle">Interactive explorations across Biology, Chemistry, Human Anatomy, Physical, Marine, Earth, and Biomedical Sciences</div>
+      </div>
+      <div class="progress-badges" aria-live="polite">
+        <div class="badge" id="badge-overall">Starter Scientist</div>
+        <div class="streak" id="streak">Streak: 0</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav id="nav" aria-label="Topics navigation">
+      <!-- Tabs injected -->
+    </nav>
+    <main id="content" tabindex="0" aria-live="polite" aria-label="Topic content">
+      <!-- Content injected -->
+    </main>
+  </div>
+
+  <div class="toast" id="toast">
+    <div class="title">You leveled up!</div>
+    <div class="msg">Keep going—your curiosity is your superpower.</div>
+  </div>
+
+  <div class="footer">© 2025 Ms. Greene the Science Queen — Learning through curiosity and celebration</div>
+
+  <script>
+    /* ===========================
+       State: progress tracking
+       =========================== */
+    const topics = [
+      { key: "biology", name: "Biology", icon: "🧬" },
+      { key: "chemistry", name: "Chemistry", icon: "⚗️" },
+      { key: "anatomy", name: "Human Anatomy", icon: "🫀" },
+      { key: "physical", name: "Physical Science", icon: "🌌" },
+      { key: "marine", name: "Marine Science", icon: "🐠" },
+      { key: "earth", name: "Earth Science", icon: "🌍" },
+      { key: "biomedical", name: "Biomedical Science", icon: "🧪" },
+    ];
+    const defaultProgress = {
+      streak: 0,
+      lastVisitDate: null,
+      topics: Object.fromEntries(topics.map(t => [t.key, { quizScore: 0, completed: false, interactions: 0 }]))
+    };
+    const progress = loadProgress();
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem('msgreene_progress');
+        if (raw) return JSON.parse(raw);
+      } catch {}
+      return JSON.parse(JSON.stringify(defaultProgress));
+    }
+    function saveProgress() {
+      localStorage.setItem('msgreene_progress', JSON.stringify(progress));
+      updateBadges();
+      renderNavProgress();
+    }
+    function bumpStreak() {
+      const today = new Date().toDateString();
+      if (progress.lastVisitDate !== today) {
+        progress.streak += 1;
+        progress.lastVisitDate = today;
+        showToast(`Streak ${progress.streak}!`, "Consistency builds mastery—nice work!");
+      }
+    }
+    function showToast(title, msg) {
+      const toast = document.getElementById('toast');
+      toast.querySelector('.title').textContent = title;
+      toast.querySelector('.msg').textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+    function updateBadges() {
+      const badge = document.getElementById('badge-overall');
+      const streak = document.getElementById('streak');
+      const total = topics.length;
+      const completedCount = topics.filter(t => progress.topics[t.key].completed).length;
+      const pct = (completedCount / total) * 100;
+      let label = 'Starter Scientist';
+      if (pct >= 20) label = 'Curious Explorer';
+      if (pct >= 50) label = 'Data Detective';
+      if (pct >= 80) label = 'STEM Trailblazer';
+      if (pct >= 100) label = 'Science Queen Champion';
+      badge.textContent = label;
+      streak.textContent = `Streak: ${progress.streak}`;
+    }
+    function renderNavProgress() {
+      const nav = document.getElementById('nav');
+      [...nav.children].forEach(tab => {
+        const key = tab.dataset.key;
+        const tp = progress.topics[key];
+        tab.classList.remove('done', 'partial');
+        const dot = tab.querySelector('.progress-dot');
+        if (tp.completed) tab.classList.add('done');
+        else if (tp.quizScore > 0 || tp.interactions > 2) tab.classList.add('partial');
+        dot.setAttribute('title', tp.completed ? 'Completed' : (tab.classList.contains('partial') ? 'In progress' : 'Not started'));
+      });
+    }
+    bumpStreak();
+
+    /* ===========================
+       Accessibility: keyboard nav
+       =========================== */
+    document.addEventListener('keydown', (e) => {
+      const keys = topics.map(t => t.key);
+      const activeKey = document.querySelector('.tab.active')?.dataset.key;
+      const idx = keys.indexOf(activeKey);
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        const next = keys[Math.min(keys.length-1, idx+1)];
+        if (next) selectTab(next);
+      }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        const prev = keys[Math.max(0, idx-1)];
+        if (prev) selectTab(prev);
+      }
+      if (e.key.toLowerCase() === 'h') selectTab('biology'); // quick shortcuts
+      if (e.key.toLowerCase() === 'c') selectTab('chemistry');
+      if (e.key.toLowerCase() === 'a') selectTab('anatomy');
+      if (e.key.toLowerCase() === 'p') selectTab('physical');
+      if (e.key.toLowerCase() === 'm') selectTab('marine');
+      if (e.key.toLowerCase() === 'e') selectTab('earth');
+      if (e.key.toLowerCase() === 'b') selectTab('biomedical');
+    });
+
+    /* ===========================
+       Build sidebar navigation
+       =========================== */
+    const nav = document.getElementById('nav');
+    topics.forEach((t, i) => {
+      const el = document.createElement('div');
+      el.className = 'tab' + (i===0 ? ' active' : '');
+      el.dataset.key = t.key;
+      el.setAttribute('role', 'button');
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('aria-label', `Open ${t.name}`);
+      el.innerHTML = `<div class="icon">${t.icon}</div><div>${t.name}</div><div class="progress-dot" aria-hidden="true"></div>`;
+      el.addEventListener('click', () => selectTab(t.key));
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') selectTab(t.key); });
+      nav.appendChild(el);
+    });
+
+    const content = document.getElementById('content');
+
+    function selectTab(key) {
+      [...nav.children].forEach(c => c.classList.toggle('active', c.dataset.key === key));
+      content.innerHTML = '';
+      panels[key]();
+      content.focus();
+    }
+
+    /* ===========================
+       Utilities: panels & UI
+       =========================== */
+    function makePanel(title, desc, topicKey) {
+      const panel = document.createElement('section');
+      panel.className = 'panel';
+      panel.setAttribute('aria-label', title);
+
+      const h2 = document.createElement('h2'); h2.textContent = title;
+      const p = document.createElement('div'); p.className = 'desc'; p.textContent = desc;
+      panel.appendChild(h2); panel.appendChild(p);
+
+      // A11y controls: pause/play + reset + export
+      const a11y = document.createElement('div');
+      a11y.className = 'a11y-controls';
+      const playBtn = makeButton('Play', 'primary');
+      const pauseBtn = makeButton('Pause', 'ghost');
+      const resetBtn = makeButton('Reset', 'ghost');
+      const exportBtn = makeButton('Export CSV', 'success');
+
+      a11y.appendChild(playBtn);
+      a11y.appendChild(pauseBtn);
+      a11y.appendChild(resetBtn);
+      a11y.appendChild(exportBtn);
+      panel.appendChild(a11y);
+
+      playBtn.setAttribute('aria-label', 'Play animation');
+      pauseBtn.setAttribute('aria-label', 'Pause animation');
+      resetBtn.setAttribute('aria-label', 'Reset simulation');
+      exportBtn.setAttribute('aria-label', 'Export data as CSV');
+
+      // Controls row
+      const controls = document.createElement('div');
+      controls.className = 'controls';
+      panel.appendChild(controls);
+
+      // Notes
+      const notes = document.createElement('div');
+      notes.className = 'notes';
+      panel.appendChild(notes);
+
+      // Quiz
+      const quiz = document.createElement('div');
+      quiz.className = 'quiz';
+      quiz.innerHTML = `<h3>Quiz: Check your understanding</h3><div class="q"></div><div class="feedback" aria-live="polite"></div><div class="celebrate"></div>`;
+      panel.appendChild(quiz);
+
+      // Wire actions
+      panel._controls = controls;
+      panel._playBtn = playBtn;
+      panel._pauseBtn = pauseBtn;
+      panel._resetBtn = resetBtn;
+      panel._exportBtn = exportBtn;
+      panel._notes = notes;
+      panel._quiz = quiz;
+      panel._topicKey = topicKey;
+
+      content.appendChild(panel);
+      return panel;
+    }
+
+    function makeButton(text, variant) {
+      const b = document.createElement('button');
+      b.className = `btn ${variant}`;
+      b.textContent = text;
+      b.type = 'button';
+      b.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') b.click(); });
+      return b;
+    }
+
+    function addSlider(controls, label, min, max, step, value, oninput) {
+      const wrap = document.createElement('div');
+      const id = 's' + Math.random().toString(36).slice(2,7);
+      wrap.innerHTML =
+        `<label for="${id}">${label}</label>
+         <input class="slider" id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${value}" aria-valuemin="${min}" aria-valuemax="${max}" aria-valuenow="${value}" aria-label="${label}">
+         <span class="readout">${value}</span>`;
+      const input = wrap.querySelector('input');
+      const readout = wrap.querySelector('.readout');
+      input.addEventListener('input', () => { readout.textContent = input.value; input.setAttribute('aria-valuenow', input.value); oninput(+input.value); markInteraction(); });
+      controls.appendChild(wrap);
+      return input;
+    }
+
+    function addNotes(panel, items) {
+      items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'note-card';
+        card.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p>${item.try ? `<p><strong>Try this:</strong> ${item.try}</p>` : ''}`;
+        panel._notes.appendChild(card);
+      });
+    }
+
+    function setupQuiz(panel, question, options, correctIndex, onDone) {
+      const qDiv = panel._quiz.querySelector('.q');
+      const feedback = panel._quiz.querySelector('.feedback');
+      const celebrate = panel._quiz.querySelector('.celebrate');
+      qDiv.innerHTML = `<p>${question}</p>`;
+      options.forEach((opt, i) => {
+        const id = 'q' + Math.random().toString(36).slice(2,7);
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="radio" name="quiz" id="${id}" value="${i}"> ${opt}`;
+        qDiv.appendChild(label);
+      });
+      const submit = makeButton('Submit answer', 'primary');
+      panel._quiz.appendChild(submit);
+      submit.addEventListener('click', () => {
+        const selected = qDiv.querySelector('input[type="radio"]:checked');
+        if (!selected) { feedback.textContent = 'Select an answer to submit.'; feedback.style.color = '#f5c04e'; return; }
+        const idx = +selected.value;
+        const correct = idx === correctIndex;
+        feedback.textContent = correct ? 'Correct! 🎉' : 'Not quite—review the notes and try again.';
+        feedback.style.color = correct ? '#59d36c' : '#ff6666';
+        const tp = progress.topics[panel._topicKey];
+        tp.quizScore = Math.max(tp.quizScore, correct ? 1 : 0);
+        if (correct) {
+          tp.completed = true;
+          celebrate.style.display = 'block';
+          celebrate.innerHTML = `<div>🏆 You mastered ${topics.find(t=>t.key===panel._topicKey).name}! Keep going, your curiosity shines.</div>`;
+          showToast('Progress celebrated!', `You completed ${topics.find(t=>t.key===panel._topicKey).name}.`);
+        }
+        saveProgress();
+        if (onDone) onDone(correct);
+      });
+    }
+
+    function markInteraction(topicKeyOverride) {
+      const key = topicKeyOverride || document.querySelector('.tab.active').dataset.key;
+      const tp = progress.topics[key];
+      tp.interactions += 1;
+      saveProgress();
+    }
+
+    function exportCSV(filename, headers, rows) {
+      const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click();
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 0);
+      showToast('Data exported', 'Your CSV is ready for homework.');
+    }
+
+    /* ===========================
+       Panels: simulations
+       =========================== */
+
+    // Biology: Predator–Prey (Lotka–Volterra)
+    function biologyPanel() {
+      const panel = makePanel(
+        "Biology — Predator–Prey dynamics",
+        "Explore how prey and predator populations change together. Adjust birth and hunt rates to see oscillations.",
+        "biology"
+      );
+      const controls = panel._controls;
+      let a = 0.8, b = 0.02, c = 0.6, d = 0.015; // parameters
+      addSlider(controls, "Prey birth rate (a)", 0.2, 1.5, 0.05, a, v => a = v);
+      addSlider(controls, "Hunt rate (b)", 0.005, 0.05, 0.005, b, v => b = v);
+      addSlider(controls, "Predator death rate (c)", 0.2, 1.2, 0.05, c, v => c = v);
+      addSlider(controls, "Predator efficiency (d)", 0.005, 0.05, 0.005, d, v => d = v);
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'grid-bg';
+      canvas.setAttribute('role', 'img');
+      canvas.setAttribute('aria-label', 'Predator and prey population lines over time');
+      panel.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = canvas.clientWidth; canvas.height = 340; }
+      resize(); window.addEventListener('resize', resize);
+
+      let prey = 40, pred = 9, running = true;
+      const trail = [];
+      function step() {
+        const dt = 0.02;
+        const dPrey = a*prey - b*prey*pred;
+        const dPred = d*prey*pred - c*pred;
+        prey += dPrey * dt; pred += dPred * dt;
+        prey = Math.max(0, Math.min(200, prey));
+        pred = Math.max(0, Math.min(200, pred));
+        trail.push({ prey, pred });
+        if (trail.length > 900) trail.shift();
+      }
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle = '#223154'; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(40, 20); ctx.lineTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
+        const yScale = (v) => 320 - v * (280/200);
+        // prey
+        ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2; ctx.beginPath();
+        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.prey); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
+        // pred
+        ctx.strokeStyle = '#ff8a66'; ctx.lineWidth = 2; ctx.beginPath();
+        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.pred); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
+        // legend
+        const legend = panel.querySelector('.legend') || (() => {
+          const l = document.createElement('div'); l.className = 'legend'; l.innerHTML =
+            '<span><i class="a"></i>Prey</span><span><i class="b"></i>Predators</span>';
+          panel.appendChild(l); return l;
+        })();
+      }
+      function loop(){ if(running){ step(); draw(); } requestAnimationFrame(loop); }
+      loop();
+
+      panel._playBtn.addEventListener('click', () => { running = true; markInteraction('biology'); });
+      panel._pauseBtn.addEventListener('click', () => { running = false; });
+      panel._resetBtn.addEventListener('click', () => { prey = 40; pred = 9; trail.length = 0; draw(); });
+      panel._exportBtn.addEventListener('click', () => {
+        const rows = trail.map((pt, i) => [i, pt.prey.toFixed(3), pt.pred.toFixed(3)]);
+        exportCSV('biology_predator_prey.csv', ['t_index','prey','predators'], rows);
+      });
+
+      addNotes(panel, [
+        { title: 'Coupled populations', text: 'Prey grow when predators are few; predators grow when prey are abundant.', try: 'Increase prey birth rate and observe predator lag.' },
+        { title: 'Balance of rates', text: 'Hunt rate and predator death shape the amplitude and period of cycles.', try: 'Lower predator death and watch how long peaks last.' }
+      ]);
+      setupQuiz(panel,
+        'In a predator–prey system, increasing predator death rate (c) typically causes:',
+        ['Higher predator peaks', 'Lower predator numbers and shorter cycles', 'No change to dynamics', 'Immediate extinction of prey'],
+        1
+      );
+    }
+
+    // Chemistry: Reaction progress & energy profile
+    function chemistryPanel() {
+      const panel = makePanel(
+        "Chemistry — Reaction rate and energy barrier",
+        "Increase temperature or catalyst strength to lower activation energy and speed up product formation.",
+        "chemistry"
+      );
+      const controls = panel._controls;
+      let temp = 300, catalyst = 0;
+      addSlider(controls, "Temperature (K)", 250, 800, 10, temp, v => temp = v);
+      addSlider(controls, "Catalyst strength", 0, 1, 0.05, catalyst, v => catalyst = v);
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox','0 0 960 340');
+      svg.setAttribute('role','img');
+      svg.setAttribute('aria-label','Energy profile curve and reaction progress bar');
+      panel.appendChild(svg);
+      function draw() {
+        svg.innerHTML = '';
+        const g = (tag, attrs={}, children=[]) => {
+          const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+          Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v)); children.forEach(c=>el.appendChild(c));
+          return el;
+        };
+        svg.appendChild(g('rect', { x:0,y:0,width:960,height:340, fill:'#0c1328' }));
+
+        const EaBase = 80; // arbitrary units
+        const Ea = EaBase * (1 - 0.6 * catalyst);
+        const k = Math.exp(-Ea / (0.001 * temp)); // toy Arrhenius-like
+
+        const path = [];
+        for (let x=0; x<=940; x+=10) {
+          const progress = x/940;
+          const react = 120, prod = 60;
+          const peak = 60 + Ea;
+          const y = react*(1-progress) + prod*progress + peak*Math.exp(-Math.pow(progress-0.5,2)/0.02);
+          path.push(`${x},${340 - y}`);
+        }
+        svg.appendChild(g('polyline', { points: path.join(' '), fill:'none', stroke:'#66e0ff', 'stroke-width':2 }));
+
+        const P = Math.min(1, k*0.02);
+        const barW = 340;
+        const formed = Math.min(barW, barW * (P*40));
+        svg.appendChild(g('rect', { x:580, y:260, width:barW, height:18, fill:'#223154', rx:9 }));
+        svg.appendChild(g('rect', { x:580, y:260, width:formed, height:18, fill:'#59d36c', rx:9 }));
+        svg.appendChild(g('text', { x:580, y:250, fill:'#9fb3cc', 'font-size':12 }, [document.createTextNode(`Rate rises with temperature; catalyst lowers barrier`)]));
+      }
+      draw();
+      panel.addEventListener('input', () => { draw(); markInteraction('chemistry'); });
+
+      panel._playBtn.addEventListener('click', () => { markInteraction('chemistry'); });
+      panel._pauseBtn.addEventListener('click', () => {});
+      panel._resetBtn.addEventListener('click', () => { temp = 300; catalyst = 0; draw(); });
+      panel._exportBtn.addEventListener('click', () => {
+        // Export sampled profile
+        const rows = [];
+        for (let x=0; x<=940; x+=10) {
+          const progress = x/940;
+          const react = 120, prod = 60;
+          const EaBase = 80, Ea = EaBase * (1 - 0.6 * catalyst);
+          const peak = 60 + Ea;
+          const y = react*(1-progress) + prod*progress + peak*Math.exp(-Math.pow(progress-0.5,2)/0.02);
+          rows.push([x, progress.toFixed(4), y.toFixed(3)]);
+        }
+        exportCSV('chemistry_energy_profile.csv', ['x','progress','energy'], rows);
+      });
+
+      addNotes(panel, [
+        { title: 'Activation energy', text: 'Reactions cross an energy barrier (Ea) to form products.', try: 'Increase catalyst strength to reduce the peak height.' },
+        { title: 'Temperature effect', text: 'Higher temperature increases the rate constant k.', try: 'Raise temperature and watch the progress bar accelerate.' }
+      ]);
+      setupQuiz(panel,
+        'A catalyst speeds a reaction primarily by:',
+        ['Increasing reactant concentration', 'Lowering the activation energy', 'Heating the system', 'Consuming products'],
+        1
+      );
+    }
+
+    // Anatomy: Breathing simulator
+    function anatomyPanel() {
+      const panel = makePanel(
+        "Human Anatomy — Breathing and lung volume",
+        "Control breath depth and rate to see changes in tidal volume and minute ventilation.",
+        "anatomy"
+      );
+      const controls = panel._controls;
+      let depth = 0.5, rate = 12;
+      addSlider(controls, "Breath depth", 0.2, 1.0, 0.05, depth, v => depth = v);
+      addSlider(controls, "Breath rate (per min)", 6, 24, 1, rate, v => rate = v);
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'grid-bg';
+      canvas.setAttribute('role','img');
+      canvas.setAttribute('aria-label','Lung volume indicator with breathing waveform');
+      panel.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
+
+      const vitalCapacity = 4.5, residual = 1.2;
+      let t = 0, running = true;
+      const trace = [];
+
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        // outline
+        ctx.fillStyle = '#1a2650'; ctx.strokeStyle = '#2a3a63';
+        ctx.beginPath(); ctx.moveTo(canvas.width*0.5, 60);
+        ctx.bezierCurveTo(canvas.width*0.3, 80, canvas.width*0.25, 240, canvas.width*0.45, 300);
+        ctx.bezierCurveTo(canvas.width*0.55, 240, canvas.width*0.7, 80, canvas.width*0.5, 60);
+        ctx.fill(); ctx.stroke();
+
+        // waveform
+        const breathsPerSec = rate/60;
+        const tidal = depth * vitalCapacity;
+        const volume = residual + tidal * (0.5*(Math.sin(2*Math.PI*breathsPerSec*t) + 1));
+        const y = 320 - (volume / (residual+vitalCapacity)) * 280;
+        ctx.fillStyle = '#66e0ff';
+        ctx.fillRect(60, y, canvas.width-120, 6);
+
+        ctx.fillStyle = '#9fb3cc'; ctx.font = '12px Segoe UI';
+        ctx.fillText(`Tidal volume: ${tidal.toFixed(2)} L`, 60, 24);
+        ctx.fillText(`Minute ventilation: ${(tidal*rate).toFixed(2)} L/min`, 60, 40);
+
+        trace.push([t.toFixed(3), tidal.toFixed(3), rate, volume.toFixed(3)]);
+        if (trace.length > 900) trace.shift();
+
+        if (running) t += 0.016;
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      panel._playBtn.addEventListener('click', () => { running = true; markInteraction('anatomy'); });
+      panel._pauseBtn.addEventListener('click', () => { running = false; });
+      panel._resetBtn.addEventListener('click', () => { t = 0; trace.length = 0; });
+      panel._exportBtn.addEventListener('click', () => {
+        exportCSV('anatomy_breathing.csv', ['t','tidal_volume_L','rate_bpm','volume_L'], trace.slice(-600));
+      });
+
+      addNotes(panel, [
+        { title: 'Tidal volume', text: 'Air moved per breath; deeper breaths increase tidal volume.', try: 'Set depth to 1.0 and compare minute ventilation.' },
+        { title: 'Minute ventilation', text: 'Tidal volume × rate; both depth and rate influence it.', try: 'Keep depth low and raise rate—notice the trade-off.' }
+      ]);
+      setupQuiz(panel,
+        'Minute ventilation increases when:',
+        ['Depth decreases, rate decreases', 'Depth increases, rate decreases', 'Depth increases or rate increases', 'Neither changes'],
+        2
+      );
+    }
+
+    // Physical Science: Projectile motion
+    function physicalPanel() {
+      const panel = makePanel(
+        "Physical Science — Projectile motion",
+        "Launch a projectile and see its trajectory. Adjust speed and angle; gravity is constant.",
+        "physical"
+      );
+      const controls = panel._controls;
+      let speed = 40, angle = 45, g = 9.8;
+      addSlider(controls, "Speed (m/s)", 10, 80, 1, speed, v => speed = v);
+      addSlider(controls, "Angle (°)", 10, 80, 1, angle, v => angle = v);
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'grid-bg';
+      canvas.setAttribute('role','img');
+      canvas.setAttribute('aria-label','Projectile trajectory curve');
+      panel.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
+
+      function drawTrajectory() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2;
+        ctx.beginPath();
+        const rad = angle * Math.PI/180;
+        const vx = speed * Math.cos(rad);
+        const vy = speed * Math.sin(rad);
+        const scale = 6; // px per meter
+        let x = 0, y = 0, t = 0, started = false;
+        while (y >= 0 && x < canvas.width/scale && t < 10) {
+          const px = 40 + x*scale;
+          const py = 320 - y*scale;
+          started ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+          started = true;
+          t += 0.05;
+          x = vx * t;
+          y = vy * t - 0.5 * g * t*t;
+        }
+        ctx.stroke();
+        ctx.strokeStyle = '#223154'; ctx.beginPath(); ctx.moveTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
+      }
+      drawTrajectory();
+      panel.addEventListener('input', () => { drawTrajectory(); markInteraction('physical'); });
+
+      panel._playBtn.addEventListener('click', () => { drawTrajectory(); markInteraction('physical'); });
+      panel._pauseBtn.addEventListener('click', () => {});
+      panel._resetBtn.addEventListener('click', () => { speed = 40; angle = 45; drawTrajectory(); });
+      panel._exportBtn.addEventListener('click', () => {
+        const rows = [];
+        const rad = angle * Math.PI/180;
+        const vx = speed * Math.cos(rad);
+        const vy = speed * Math.sin(rad);
+        for (let t=0; t<=5; t+=0.05) {
+          const x = vx * t, y = vy * t - 0.5 * g * t*t;
+          if (y < 0) break;
+          rows.push([t.toFixed(2), x.toFixed(3), y.toFixed(3)]);
+        }
+        exportCSV('physical_projectile.csv', ['t_s','x_m','y_m'], rows);
+      });
+
+      addNotes(panel, [
+        { title: 'Launch angle', text: 'Neglecting air, range is maximized near 45°.', try: 'Sweep angles and observe trajectory height vs. range.' },
+        { title: 'Independence of motion', text: 'Horizontal and vertical motions combine to form the arc.', try: 'Hold speed, vary angle to see peak changes.' }
+      ]);
+      setupQuiz(panel,
+        'With no air resistance, the launch angle for maximum range on level ground is:',
+        ['30°', '45°', '60°', 'Depends only on speed'],
+        1
+      );
+    }
+
+    // Marine Science: Thermocline
+    function marinePanel() {
+      const panel = makePanel(
+        "Marine Science — Thermocline and mixed layer",
+        "Change wind mixing and sunlight to see how surface warms and the thermocline shifts.",
+        "marine"
+      );
+      const controls = panel._controls;
+      let wind = 0.4, sun = 0.6;
+      addSlider(controls, "Wind mixing", 0, 1, 0.05, wind, v => wind = v);
+      addSlider(controls, "Sunlight", 0, 1, 0.05, sun, v => sun = v);
+
+      const canvas = document.createElement('canvas');
+      canvas.className = 'grid-bg';
+      canvas.setAttribute('role','img');
+      canvas.setAttribute('aria-label','Ocean temperature profile by depth');
+      panel.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
+
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        const depthMax = 300;
+        const profile = [];
+        for (let z=0; z<=depthMax; z+=2) {
+          const mixDepth = 40 + 120*wind;
+          const surfaceT = 12 + 18*sun;
+          const deepT = 4 + 2*wind;
+          const t = z < mixDepth
+            ? surfaceT
+            : deepT + (surfaceT - deepT) * Math.exp(-(z-mixDepth)/60);
+          profile.push({ z, t });
+        }
+        for (let i=0; i<profile.length; i++) {
+          const y = 20 + profile[i].z;
+          const hue = 200 - profile[i].t*3;
+          ctx.fillStyle = `hsl(${hue}, 60%, 40%)`;
+          ctx.fillRect(80, y, canvas.width-160, 2);
+        }
+        ctx.fillStyle = '#9fb3cc'; ctx.font = '12px Segoe UI';
+        ctx.fillText('Surface mixed layer', 86, 40 + 120*wind);
+        ctx.fillText('Thermocline below mixed layer', 86, 60 + 120*wind);
+      }
+      draw();
+      panel.addEventListener('input', () => { draw(); markInteraction('marine'); });
+
+      panel._playBtn.addEventListener('click', () => { draw(); markInteraction('marine'); });
+      panel._pauseBtn.addEventListener('click', () => {});
+      panel._resetBtn.addEventListener('click', () => { wind = 0.4; sun = 0.6; draw(); });
+      panel._exportBtn.addEventListener('click', () => {
+        const rows = [];
+        for (let z=0; z<=300; z+=5) {
+          const mixDepth = 40 + 120*wind;
+          const surfaceT = 12 + 18*sun;
+          const deepT = 4 + 2*wind;
+          const t = z < mixDepth ? surfaceT : deepT + (surfaceT - deepT) * Math.exp(-(z-mixDepth)/60);
+          rows.push([z, t.toFixed(3)]);
+        }
+        exportCSV('marine_thermocline.csv', ['depth_m','temp_C'], rows);
+      });
+
+      addNotes(panel, [
+        { title: 'Mixed layer', text: 'Wind stirs the surface, making it nearly uniform in temperature.', try: 'Increase wind to deepen the mixed layer.' },
+        { title: 'Thermocline', text: 'Below the mixed layer, temperature drops rapidly with depth.', try: 'Reduce sun to cool the surface and steepen the gradient.' }
+      ]);
+      setupQuiz(panel,
+        'A stronger wind generally makes the mixed layer:',
+        ['Shallower and warmer', 'Deeper and more uniform', 'Disappear entirely', 'Unchanged'],
+        1
+      );
+    }
+
+    // Earth Science: Plate boundaries
+    function earthPanel() {
+      const panel = makePanel(
+        "Earth Science — Plate boundaries",
+        "Drag plates to see convergent (mountains), divergent (rifts), and transform (faults) interactions.",
+        "earth"
+      );
+      const canvas = document.createElement('canvas');
+      canvas.className = 'grid-bg';
+      canvas.setAttribute('role','img');
+      canvas.setAttribute('aria-label','Interactive plate boundary visualization');
+      panel.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
+
+      let plateA = { x: 240, y: 160, color: '#66e0ff' };
+      let plateB = { x: 720, y: 160, color: '#ff8a66' };
+      let dragging = null;
+
+      canvas.addEventListener('mousedown', e => {
+        const r = canvas.getBoundingClientRect();
+        const mx = e.clientX - r.left;
+        if (Math.abs(mx - plateA.x) < 140) dragging = 'A';
+        else if (Math.abs(mx - plateB.x) < 140) dragging = 'B';
+      });
+      window.addEventListener('mouseup', ()=> dragging = null);
+      window.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        const r = canvas.getBoundingClientRect();
+        const mx = e.clientX - r.left;
+        if (dragging === 'A') plateA.x = Math.max(80, Math.min(canvas.width/2, mx));
+        if (dragging === 'B') plateB.x = Math.max(canvas.width/2, Math.min(canvas.width-80, mx));
+        markInteraction('earth');
+      });
+
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = '#0d1734'; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = plateA.color; ctx.fillRect(plateA.x-160, 120, 160, 80);
+        ctx.fillStyle = plateB.color; ctx.fillRect(plateB.x, 120, 160, 80);
+        const gap = plateB.x - plateA.x;
+        ctx.strokeStyle = '#9fb3cc'; ctx.lineWidth = 2;
+        ctx.beginPath(); ctx.moveTo(plateA.x, 120); ctx.lineTo(plateA.x, 200); ctx.moveTo(plateB.x, 120); ctx.lineTo(plateB.x, 200); ctx.stroke();
+
+        let label = '', visuals = () => {};
+        if (gap > 200) {
+          label = 'Divergent boundary — rift valley and mid-ocean ridge';
+          visuals = () => {
+            ctx.strokeStyle = '#59d36c';
+            ctx.beginPath();
+            ctx.moveTo(plateA.x+20, 200); ctx.lineTo(plateA.x+60, 160);
+            ctx.lineTo(plateA.x+100, 200); ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(plateB.x-20, 200); ctx.lineTo(plateB.x-60, 160);
+            ctx.lineTo(plateB.x-100, 200); ctx.stroke();
+          };
+        } else if (gap < 60) {
+          label = 'Convergent boundary — uplift and mountains';
+          visuals = () => {
+            ctx.fillStyle = '#f5c04e';
+            for (let i=0;i<5;i++){
+              const bx = (plateA.x + plateB.x)/2 - 40 + i*16;
+              const by = 320 - 60 - Math.random()*12;
+              ctx.beginPath(); ctx.moveTo(bx, by);
+              ctx.lineTo(bx+10, by+20); ctx.lineTo(bx-10, by+20); ctx.closePath(); ctx.fill();
+            }
+          };
+        } else {
+          label = 'Transform boundary — lateral sliding and faults';
+          visuals = () => {
+            ctx.strokeStyle = '#ff6666';
+            ctx.setLineDash([6,4]);
+            ctx.beginPath(); ctx.moveTo((plateA.x+plateB.x)/2, 110); ctx.lineTo((plateA.x+plateB.x)/2, 230); ctx.stroke();
+            ctx.setLineDash([]);
+          };
+        }
+        visuals();
+        ctx.fillStyle = '#9fb3cc'; ctx.font = '12px Segoe UI';
+        ctx.fillText(label, 60, 40);
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      panel._playBtn.addEventListener('click', () => { markInteraction('earth'); });
+      panel._pauseBtn.addEventListener('click', () => {});
+      panel._resetBtn.addEventListener('click', () => { plateA.x = 240; plateB.x = 720; });
+      panel._exportBtn.addEventListener('click', () => {
+        exportCSV('earth_plate_boundary.csv', ['plateA_x','plateB_x','gap'], [[plateA.x, plateB.x, (plateB.x - plateA.x).toFixed(2)]]);
+      });
+
+      addNotes(panel, [
+        { title: 'Three boundary types', text: 'Divergent (apart), convergent (together), transform (sideways).', try: 'Drag plates to cross thresholds and observe labels.' },
+        { title: 'Topography changes', text: 'Boundaries create ridges, mountains, and faults.', try: 'Narrow the gap to see mountain uplift.' }
+      ]);
+      setupQuiz(panel,
+        'A transform boundary is characterized by:',
+        ['Volcanic subduction', 'Sideways motion and faults', 'Seafloor spreading', 'Massive uplift'],
+        1
+      );
+    }
+
+    // Biomedical Science: Epidemic curve (SIR)
+    function biomedicalPanel() {
+      const panel = makePanel(
+        "Biomedical Science — Epidemic curve",
+        "Adjust transmission and recovery to see how an outbreak spreads and subsides over time.",
+        "biomedical"
+      );
+      const controls = panel._controls;
+      let beta = 0.9, gamma = 0.2, N = 1000;
+      addSlider(controls, "Transmission (β)", 0.1, 1.5, 0.05, beta, v => beta = v);
+      addSlider(controls, "Recovery (γ)", 0.05, 0.8, 0.05, gamma, v => gamma
+
