@@ -1,1365 +1,723 @@
-@@ -2,1042 +2,322 @@
- <html lang="en">
- <html lang="en">
- <head>
- <head>
-   <meta charset="UTF-8" />
-   <meta charset="UTF-8" />
-  <title>Ms. Greene the Science Queen — Interactive STEM Learning</title>
-   <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ms. Greene the Science Queen | Science Tutoring</title>
-  <meta name="description" content="Personalized science tutoring that turns curiosity into confidence. Middle school through AP and intro college-level support." />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ms. Greene the Science Queen | Interactive Science Tutoring</title>
+    <meta name="description" content="Personalized science tutoring with interactive learning modules. Master Biology, Chemistry, Physics and more." />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald: #1B8E5A;
+            --purple: #6A35A1;
+            --mint: #E8F7F1;
+            --charcoal: #1E1E1E;
+            --ink: #2E2E2E;
+            --light: #FFFFFF;
+            --gray: #F5F5F7;
+            --accent: #FFD452;
+            --dark-bg: #0a0f21;
+            --dark-panel: #141a2f;
+            --cyan: #66e0ff;
+            --text-light: #eaf2ff;
+        }
+        
+        * { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
+        body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); background: var(--light); line-height: 1.6; }
 
-   <style>
-   <style>
-     :root {
-     :root {
-      --bg: #0a0f21;
-      --emerald: #1B8E5A;
-      --panel: #141a2f;
-      --purple: #6A35A1;
-      --accent: #66e0ff;
-      --mint: #E8F7F1;
-      --accent2: #ff8a66;
-      --charcoal: #1E1E1E;
-      --accent3: #c792ea;
-      --ink: #2E2E2E;
-      --text: #eaf2ff;
-      --light: #FFFFFF;
-      --muted: #9fb3cc;
-      --gray: #F5F5F7;
-      --good: #59d36c;
-      --accent: #FFD452;
-      --warn: #f5c04e;
-      --bad: #ff6666;
-      --brand1: #242b4f;
-      --brand2: #1b2143;
-      --gold: #ffd266;
-      --purple: #7a5cff;
-      --pink: #ff78c3;
-     }
-     }
-     * { box-sizing: border-box; }
-     * { box-sizing: border-box; }
-    body {
-    html, body { margin:0; padding:0; }
-      margin: 0;
-    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); background: var(--light); line-height: 1.6; }
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue";
+        /* Layout */
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Header */
+        header { 
+            position: sticky; 
+            top: 0; 
+            background: rgba(255,255,255,0.92); 
+            backdrop-filter: saturate(180%) blur(8px); 
+            border-bottom: 1px solid #eee; 
+            z-index: 50; 
+        }
+        .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+        .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .crown { 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 8px; 
+            background: linear-gradient(135deg, var(--emerald), var(--purple)); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+        .brand h1 { font-family: Poppins, sans-serif; font-weight: 800; font-size: 18px; margin: 0; color: var(--charcoal); }
+        nav a { color: var(--charcoal); text-decoration: none; padding: 10px 12px; border-radius: 8px; font-weight: 600; transition: background 0.2s; }
+        nav a:hover { background: var(--gray); }
+        .cta { background: var(--emerald); color: white; }
+        .cta:hover { background: #157349; }
 
-      color: var(--text);
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-      background:
-    header { position: sticky; top:0; background: rgba(255,255,255,0.92); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid #eee; z-index: 50; }
-        radial-gradient(1200px 600px at 20% 0%, #131a33, var(--bg)),
-    .nav { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; }
-        linear-gradient(180deg, var(--brand1), var(--brand2));
-    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
-    }
-    .crown { width:36px; height:36px; border-radius:8px; background: linear-gradient(135deg, var(--emerald), var(--purple)); display:flex; align-items:center; justify-content:center; color:white; font-weight:800; font-family:Poppins; }
+        /* Hero */
+        .hero { background: linear-gradient(180deg, var(--mint), #ffffff); border-bottom: 1px solid #eee; }
+        .hero-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: center; padding: 56px 0; }
+        .hero h2 { font-family: Poppins; font-size: 42px; line-height: 1.2; margin: 0 0 12px; color: var(--charcoal); }
+        .hero p { font-size: 18px; margin: 0 0 20px; }
+        .hero .badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #3a2a00; padding: 8px 12px; border-radius: 999px; font-weight: 700; }
+        .hero .card { background: white; border: 1px solid #eee; border-radius: 16px; padding: 18px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+        .hero .list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+        .chip { background: var(--gray); padding: 8px 12px; border-radius: 999px; font-weight: 600; }
 
-    .brand h1 { font-family:Poppins, sans-serif; font-weight:800; font-size:18px; margin:0; color: var(--charcoal); }
-    /* Header & Branding */
-    nav a { color: var(--charcoal); text-decoration:none; padding:10px 12px; border-radius:8px; font-weight:600; }
-    header {
-    nav a:hover { background: var(--gray); }
-      padding: 16px 20px;
-    .cta { background: var(--emerald); color: white; }
-      position: sticky; top: 0; z-index: 60; backdrop-filter: blur(8px);
-    .cta:hover { background: #157349; }
-      border-bottom: 1px solid #243252; background: rgba(10, 14, 28, 0.7);
+        /* Sections */
+        section { padding: 56px 0; }
+        h3 { font-family: Poppins; font-size: 28px; margin: 0 0 12px; color: var(--charcoal); }
+        .sub { color: #666; margin-bottom: 24px; }
 
-    }
-    .hero { background: linear-gradient(180deg, var(--mint), #ffffff); border-bottom:1px solid #eee; }
-    .brand {
-    .hero-inner { display:grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items:center; padding: 56px 0; }
-      display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center;
-    .hero h2 { font-family:Poppins; font-size:42px; line-height:1.2; margin:0 0 12px; color: var(--charcoal); }
-    }
-    .hero p { font-size:18px; margin:0 0 20px; }
-    .avatar {
-    .hero .badge { display:inline-flex; align-items:center; gap:8px; background: var(--accent); color: #3a2a00; padding:8px 12px; border-radius:999px; font-weight:700; }
-      width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
-    .hero .card { background:white; border:1px solid #eee; border-radius:16px; padding:18px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
-      box-shadow: 0 0 22px #7a5cff44; border: 2px solid #7a5cff;
-    .hero .list { display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:12px; }
-      display: grid; place-items: center; background: #0f1430;
-    .chip { background: var(--gray); padding:8px 12px; border-radius:999px; font-weight:600; }
-    }
+        /* Grid cards */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .card { background: white; border: 1px solid #eee; border-radius: 16px; padding: 18px; }
+        .card h4 { font-family: Poppins; margin: 0 0 8px; font-size: 18px; }
+        .card .meta { color: #666; font-size: 14px; }
+        .card ul { margin: 0; padding-left: 20px; }
+        .card li { margin: 8px 0; }
 
-    .avatar svg { width: 44px; height: 44px; }
-    section { padding: 56px 0; }
-    .title-wrap h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
-    h3 { font-family:Poppins; font-size:28px; margin:0 0 12px; color: var(--charcoal); }
-    .title-wrap .subtitle { color: var(--muted); font-size: 13px; }
-    .sub { color:#666; margin-bottom:24px; }
-    .progress-badges { display: flex; gap: 8px; align-items: center; }
+        /* Pricing */
+        .price { font-weight: 800; color: var(--purple); font-size: 22px; }
+        .option { display: flex; flex-direction: column; gap: 8px; }
 
-    .badge {
-    .cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-      font-size: 12px; color: #0b0e1f; background: var(--gold);
-    .card { background:white; border:1px solid #eee; border-radius:16px; padding:18px; }
-      padding: 6px 8px; border-radius: 999px; border: 1px solid #f2c44d;
-    .card h4 { font-family:Poppins; margin:0 0 8px; font-size:18px; }
-      box-shadow: 0 3px 10px rgba(255,210,102,0.25);
-    .card .meta { color:#666; font-size:14px; }
-    }
+        /* Testimonials */
+        .quote { font-style: italic; color: #333; }
+        .avatar { width: 40px; height: 40px; border-radius: 999px; background: var(--mint); display: inline-block; margin-right: 10px; border: 1px solid #ddd; }
 
-    .streak {
-    .price { font-weight:800; color: var(--purple); font-size:22px; }
-      font-size: 12px; color: var(--text); background: #20305f;
-    .option { display:flex; flex-direction:column; gap:8px; }
-      padding: 6px 8px; border-radius: 999px; border: 1px solid #3b4f8a;
+        /* Booking form */
+        .form { background: white; border: 1px solid #eee; border-radius: 16px; padding: 20px; }
+        label { display: block; font-weight: 600; margin: 12px 0 6px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 10px; font: inherit; }
+        textarea { min-height: 110px; }
+        .inline { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn { display: inline-block; border: none; background: var(--emerald); color: white; padding: 12px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background: #157349; }
+        .note { font-size: 13px; color: #666; margin-top: 8px; }
 
-    }
-    .quote { font-style:italic; color:#333; }
+        /* Interactive Modules Section */
+        #modules { background: var(--dark-bg); color: var(--text-light); }
+        #modules h3 { color: var(--text-light); }
+        #modules .sub { color: var(--mint); }
+        .modules-intro { margin-bottom: 40px; }
+        
+        .module-controls { 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .module-btn {
+            background: var(--dark-panel);
+            color: var(--text-light);
+            border: 1px solid #2a3a63;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .module-btn:hover {
+            background: #1f2a47;
+            border-color: var(--cyan);
+        }
+        .module-btn.active {
+            background: var(--emerald);
+            border-color: var(--emerald);
+            color: white;
+        }
 
-    .avatar { width:40px; height:40px; border-radius:999px; background: var(--mint); display:inline-block; margin-right:10px; border: 1px solid #ddd; }
-    .layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 88px); }
+        .module-display {
+            background: var(--dark-panel);
+            border: 1px solid #243252;
+            border-radius: 12px;
+            padding: 24px;
+            min-height: 400px;
+            display: none;
+        }
+        .module-display.active {
+            display: block;
+        }
 
-    nav {
-    .form { background:white; border:1px solid #eee; border-radius:16px; padding:20px; }
-      border-right: 1px solid #243252; padding: 16px; background: linear-gradient(180deg, #0e152a, #0b1020 50%);
-    label { display:block; font-weight:600; margin:12px 0 6px; }
-    }
-    input, select, textarea { width:100%; padding:12px; border:1px solid #ddd; border-radius:10px; font:inherit; }
-    .tab {
-    textarea { min-height:110px; }
-      display: grid; grid-template-columns: 24px 1fr auto; align-items: center;
-    .inline { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
-      gap: 10px; padding: 10px 12px; margin-bottom: 6px; border-radius: 10px; cursor: pointer;
-    .btn { display:inline-block; border:none; background: var(--emerald); color:white; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer; }
-      color: var(--text); border: 1px solid transparent;
-    .btn:hover { background:#157349; }
-    }
-    .note { font-size:13px; color:#666; margin-top:8px; }
-    .tab:hover { background: #111936; border-color: #1f2a47; }
+        canvas {
+            width: 100%;
+            max-width: 100%;
+            height: 300px;
+            background: #0c1328;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
 
-    .tab.active { background: #152044; border-color: #2a3a63; box-shadow: inset 0 0 0 1px #2a3a63; }
-    details { background:white; border:1px solid #eee; border-radius:12px; padding:12px 16px; margin-bottom:12px; }
-    .tab .icon { font-size: 16px; }
-    summary { cursor:pointer; font-weight:700; }
-    .tab .progress-dot {
+        .module-notes {
+            margin-top: 20px;
+            display: grid;
+            gap: 12px;
+        }
+        .note-card {
+            background: #0f1738;
+            border: 1px solid #233055;
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .note-card h4 { margin: 0 0 6px; color: var(--cyan); }
+        .note-card p { margin: 0; color: #9fb3cc; font-size: 14px; }
 
-      width: 10px; height: 10px; border-radius: 50%;
-    footer { background: var(--charcoal); color:#ddd; }
-      background: #223154; border: 1px solid #2a3a63;
-    footer a { color:#fff; text-decoration: none; }
-    }
-    .footer-grid { display:grid; grid-template-columns: 2fr 1fr; gap:24px; padding: 24px 0; }
-    .tab.done .progress-dot { background: #59d36c; border-color: #59d36c; }
-    .small { font-size:13px; color:#aaa; }
-    .tab.partial .progress-dot { background: #f5c04e; border-color: #f5c04e; }
+        /* FAQ */
+        details { background: white; border: 1px solid #eee; border-radius: 12px; padding: 12px 16px; margin-bottom: 12px; }
+        summary { cursor: pointer; font-weight: 700; }
 
+        /* Footer */
+        footer { background: var(--charcoal); color: #ddd; }
+        footer a { color: #fff; text-decoration: none; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; padding: 24px 0; }
+        .small { font-size: 13px; color: #aaa; }
 
-    @media (max-width: 880px) {
-    main { padding: 20px; }
-      .hero-inner { grid-template-columns: 1fr; }
-    .panel {
-      .inline { grid-template-columns: 1fr; }
-      background: linear-gradient(180deg, #12172b, #101428);
-      .footer-grid { grid-template-columns: 1fr; }
-      border: 1px solid #243252; border-radius: 14px; padding: 16px; margin-bottom: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-    }
-    h2 { margin: 0 0 6px; font-size: 20px; }
-    .desc { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+        /* Responsive */
+        @media (max-width: 880px) {
+            .hero-inner { grid-template-columns: 1fr; }
+            .inline { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .module-controls { flex-direction: column; }
+            .module-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
 
-    .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
-    .controls label { font-size: 13px; color: var(--muted); }
-    .btn {
-      background: #16244d; color: var(--text); border: 1px solid #2a3a63;
-      padding: 8px 10px; border-radius: 8px; cursor: pointer; font-size: 13px;
-    }
-    .btn:hover { background: #183058; }
-    .btn.primary { background: var(--purple); border-color: #5c47e6; color: white; }
-    .btn.success { background: var(--good); border-color: #3eb758; color: #0b0e1f; }
-    .btn.warn { background: var(--warn); border-color: #d6a63e; color: #0b0e1f; }
-    .btn.ghost { background: transparent; border-color: #2a3a63; }
-    .slider { width: 180px; }
-    .readout { font-size: 12px; color: var(--muted); margin-left: 6px; }
+    <!-- Header -->
+    <header>
+        <div class="container nav">
+            <a class="brand" href="#top" aria-label="Ms. Greene the Science Queen home">
+                <div class="crown" aria-hidden="true">Q</div>
+                <h1>Ms. Greene the Science Queen</h1>
+            </a>
+            <nav aria-label="Primary navigation">
+                <a href="#about">About</a>
+                <a href="#subjects">Subjects</a>
+                <a href="#modules">Interactive Modules</a>
+                <a href="#testimonials">Reviews</a>
+                <a href="#booking" class="cta">Book a session</a>
+            </nav>
+        </div>
+    </header>
 
-    .a11y-controls { display: flex; gap: 10px; margin-bottom: 10px; }
-
-    canvas, svg { width: 100%; max-width: 960px; height: 340px; background: #0c1328; border-radius: 12px; }
-    .grid-bg {
-      background-image:
-        linear-gradient(#1b2544 1px, transparent 1px),
-        linear-gradient(90deg, #1b2544 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-    .legend { display: flex; gap: 12px; margin-top: 8px; font-size: 12px; color: var(--muted); }
-    .legend i { width: 12px; height: 12px; display: inline-block; border-radius: 3px; margin-right: 6px; }
-    .legend .a { background: var(--accent); }
-    .legend .b { background: var(--accent2); }
-    .legend .g { background: var(--good); }
-    .legend .w { background: var(--warn); }
-    .legend .d { background: var(--bad); }
-
-    /* Notes & Quizzes */
-    .notes {
-      display: grid; gap: 8px; border-top: 1px dashed #243252; margin-top: 14px; padding-top: 10px;
-    }
-    .note-card {
-      background: #0f1738; border: 1px solid #233055; border-radius: 10px; padding: 10px;
-    }
-    .note-card h3 { margin: 0 0 6px; font-size: 16px; }
-    .note-card p { margin: 0 0 6px; color: var(--muted); font-size: 13px; }
-    .quiz {
-      margin-top: 10px; background: #0f1738; border: 1px solid #233055; border-radius: 10px; padding: 10px;
-    }
-    .quiz h3 { margin: 0 0 6px; font-size: 16px; }
-    .quiz .q { margin-bottom: 10px; }
-    .quiz label { display: flex; align-items: center; gap: 6px; margin: 4px 0; cursor: pointer; }
-    .quiz .feedback { margin-top: 8px; font-size: 13px; }
-    .celebrate {
-      margin-top: 8px; padding: 10px; border-radius: 10px; background: #132355; border: 1px solid #2a3a63;
-      display: none;
-    }
-
-    /* Toast celebration */
-    .toast {
-      position: fixed; right: 16px; bottom: 16px;
-      background: #12193a; border: 1px solid #2a3a63; border-radius: 12px;
-      padding: 10px 12px; color: var(--text); box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-      display: none; z-index: 100;
-    }
-    .toast .title { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
-    .toast .msg { font-size: 12px; color: var(--muted); }
-
-    .footer { color: var(--muted); font-size: 12px; text-align: center; padding: 12px; }
-
-    @media (max-width: 980px) {
-      .layout { grid-template-columns: 1fr; }
-      nav { border-right: none; border-bottom: 1px solid #243252; }
-      header { position: static; }
-     }
-     }
-   </style>
-   </style>
- </head>
- </head>
- <body>
- <body>
-  <header aria-label="Site header">
-
-    <div class="brand">
-  <header>
-      <div class="avatar" aria-hidden="true">
-    <div class="container nav">
-        <!-- Simple illustrated avatar of a Black female STEM scientist -->
-      <a class="brand" href="#top">
-        <svg viewBox="0 0 64 64" role="img" aria-label="Ms. Greene the Science Queen">
-        <div class="crown">Q</div>
-          <defs>
-            <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#2b1e16"></stop>
-              <stop offset="1" stop-color="#0f0b08"></stop>
-            </linearGradient>
-          </defs>
-          <circle cx="32" cy="32" r="30" fill="#0b1020"></circle>
-          <!-- Hair -->
-          <circle cx="32" cy="26" r="18" fill="url(#hair)"></circle>
-          <!-- Face -->
-          <circle cx="32" cy="32" r="12" fill="#7b4f37"></circle>
-          <!-- Glasses -->
-          <rect x="22" y="28" width="8" height="6" rx="2" fill="#66e0ff"></rect>
-          <rect x="34" y="28" width="8" height="6" rx="2" fill="#66e0ff"></rect>
-          <rect x="30" y="30" width="4" height="2" fill="#66e0ff"></rect>
-          <!-- Lab coat -->
-          <path d="M20 44 L44 44 L40 60 L24 60 Z" fill="#eaf2ff"></path>
-          <!-- Crown -->
-          <g transform="translate(42,16)">
-            <path d="M0 8 L6 0 L12 8 L18 2 L24 8 L24 12 L0 12 Z" fill="#ffd266" stroke="#e6b84d" stroke-width="1"></path>
-          </g>
-        </svg>
-      </div>
-      <div class="title-wrap">
-         <h1>Ms. Greene the Science Queen</h1>
-         <h1>Ms. Greene the Science Queen</h1>
-        <div class="subtitle">Interactive explorations across Biology, Chemistry, Human Anatomy, Physical, Marine, Earth, and Biomedical Sciences</div>
-      </a>
-      </div>
-      <nav>
-      <div class="progress-badges" aria-live="polite">
-        <a href="#about">About</a>
-        <div class="badge" id="badge-overall">Starter Scientist</div>
-        <a href="#subjects">Subjects</a>
-        <div class="streak" id="streak">Streak: 0</div>
-        <a href="#options">Tutoring</a>
-      </div>
-        <a href="#testimonials">Reviews</a>
-        <a href="#booking" class="cta">Book a session</a>
-      </nav>
-     </div>
-     </div>
-   </header>
-   </header>
- 
- 
-  <div class="layout">
-  <main id="top" class="hero">
-    <nav id="nav" aria-label="Topics navigation">
-    <div class="container hero-inner">
-      <!-- Tabs injected -->
-      <div>
-    </nav>
-        <div class="badge">Charlotte • Online & In‑Person</div>
-    <main id="content" tabindex="0" aria-live="polite" aria-label="Topic content">
-        <h2>Turning curiosity into confidence—one experiment at a time.</h2>
-      <!-- Content injected -->
-        <p>I help middle school, high school, and intro college students master science with clear explanations, compassionate coaching, and structured practice.</p>
+    <!-- Hero -->
+    <main id="top" class="hero">
+        <div class="container hero-inner">
+            <div>
+                <div class="badge">Charlotte • Online & In‑Person</div>
+                <h2>Turning curiosity into confidence—one experiment at a time.</h2>
+                <p>I help middle school, high school, and intro college students master science with clear explanations, compassionate coaching, and interactive learning tools.</p>
+                <div class="list">
+                    <div class="chip">Biology • Chemistry • Physics</div>
+                    <div class="chip">Honors • AP • STEM prep</div>
+                </div>
+                <p class="note">Flexible scheduling, tailored plans, and progress updates for families.</p>
+                <a href="#booking" class="btn" aria-label="Book a session">Book a session</a>
+            </div>
+            <div class="card" aria-labelledby="fast-facts">
+                <h4 id="fast-facts">Fast facts</h4>
+                <ul>
+                    <li><strong>Experience:</strong> 8+ years teaching & tutoring</li>
+                    <li><strong>Style:</strong> Concept-first, problem-based, test-smart</li>
+                    <li><strong>Students:</strong> Grades 6–12, AP, intro college</li>
+                    <li><strong>Format:</strong> Zoom or Charlotte-area in-person</li>
+                </ul>
+            </div>
+        </div>
     </main>
-        <div class="list">
-  </div>
-          <div class="chip">Biology • Chemistry • Physics</div>
 
-          <div class="chip">Honors • AP • STEM prep</div>
-  <div class="toast" id="toast">
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <h3>About Ms. Greene</h3>
+            <p class="sub">Science is more than memorizing facts—it's learning how to think. I meet students where they are, build strong foundations, and connect ideas so they stick.</p>
+            <div class="cards">
+                <div class="card">
+                    <h4>Teaching philosophy</h4>
+                    <p>I use everyday analogies, guided inquiry, and scaffolded problem sets. Students learn to explain concepts in their own words, then apply them in increasingly complex scenarios.</p>
+                </div>
+                <div class="card">
+                    <h4>Results you can expect</h4>
+                    <p>Improved test scores, less anxiety, and stronger study habits. I share short feedback notes after sessions so families see progress and next steps.</p>
+                </div>
+                <div class="card">
+                    <h4>What makes this different</h4>
+                    <p>Blending conceptual clarity with strategic test skills—plus interactive simulations to reinforce understanding.</p>
+                </div>
+            </div>
         </div>
-    <div class="title">You leveled up!</div>
-        <p class="note">Flexible scheduling, tailored plans, and progress updates for families.</p>
-    <div class="msg">Keep going—your curiosity is your superpower.</div>
-        <a href="#booking" class="btn">Book a session</a>
-  </div>
-      </div>
+    </section>
 
-      <div class="card">
-  <div class="footer">© 2025 Ms. Greene the Science Queen — Learning through curiosity and celebration</div>
-        <h4>Fast facts</h4>
-
-        <ul>
-  <script>
-          <li><strong>Experience:</strong> 8+ years teaching & tutoring</li>
-    /* ===========================
-          <li><strong>Style:</strong> Concept-first, problem-based, test-smart</li>
-       State: progress tracking
-          <li><strong>Students:</strong> Grades 6–12, AP, intro college</li>
-       =========================== */
-          <li><strong>Format:</strong> Zoom or Charlotte-area in-person</li>
-    const topics = [
-        </ul>
-      { key: "biology", name: "Biology", icon: "🧬" },
-      </div>
-      { key: "chemistry", name: "Chemistry", icon: "⚗️" },
-    </div>
-      { key: "anatomy", name: "Human Anatomy", icon: "🫀" },
-  </main>
-      { key: "physical", name: "Physical Science", icon: "🌌" },
-
-      { key: "marine", name: "Marine Science", icon: "🐠" },
-  <section id="about">
-      { key: "earth", name: "Earth Science", icon: "🌍" },
-    <div class="container">
-      { key: "biomedical", name: "Biomedical Science", icon: "🧪" },
-      <h3>About Ms. Greene</h3>
-    ];
-      <p class="sub">Science is more than memorizing facts—it’s learning how to think. I meet students where they are, build strong foundations, and connect ideas so they stick.</p>
-    const defaultProgress = {
-      <div class="cards">
-      streak: 0,
-        <div class="card">
-      lastVisitDate: null,
-          <h4>Teaching philosophy</h4>
-      topics: Object.fromEntries(topics.map(t => [t.key, { quizScore: 0, completed: false, interactions: 0 }]))
-          <p>I use everyday analogies, guided inquiry, and scaffolded problem sets. Students learn to explain concepts in their own words, then apply them in increasingly complex scenarios.</p>
-    };
+    <!-- Subjects -->
+    <section id="subjects">
+        <div class="container">
+            <h3>Subjects and levels</h3>
+            <p class="sub">Core science courses plus enrichment and exam support.</p>
+            <div class="cards">
+                <div class="card">
+                    <h4>Biology</h4>
+                    <p>Cells, genetics, evolution, ecology, physiology, lab skills.</p>
+                    <p class="meta">Middle school • Honors • AP Biology • Intro college</p>
+                </div>
+                <div class="card">
+                    <h4>Chemistry</h4>
+                    <p>Stoichiometry, thermochemistry, bonding, kinetics, equilibrium, lab safety.</p>
+                    <p class="meta">General • Honors • AP Chemistry • Intro college</p>
+                </div>
+                <div class="card">
+                    <h4>Physics</h4>
+                    <p>Mechanics, energy, waves, electricity & magnetism, problem strategies.</p>
+                    <p class="meta">Conceptual • Honors • AP Physics 1 • Intro college</p>
+                </div>
+                <div class="card">
+                    <h4>Exam prep</h4>
+                    <p>Unit reviews, practice tests, error analysis, time management, lab write‑ups.</p>
+                    <p class="meta">AP • End‑of‑Course • Midterms • Finals</p>
+                </div>
+            </div>
         </div>
-    const progress = loadProgress();
-        <div class="card">
-    function loadProgress() {
-          <h4>Results you can expect</h4>
-      try {
-          <p>Improved test scores, less anxiety, and stronger study habits. I share short feedback notes after sessions so families see progress and next steps.</p>
-        const raw = localStorage.getItem('msgreene_progress');
+    </section>
+
+    <!-- Interactive Modules -->
+    <section id="modules">
+        <div class="container">
+            <h3>Interactive Learning Modules</h3>
+            <p class="sub">Explore concepts with hands-on simulations. Adjust parameters and see how systems respond in real time.</p>
+            
+            <div class="modules-intro">
+                <p>These interactive modules help reinforce what we work on in tutoring sessions. Click a topic below to experiment with real-world scientific phenomena.</p>
+            </div>
+
+            <div class="module-controls">
+                <button class="module-btn active" onclick="selectModule('biology')">🧬 Biology</button>
+                <button class="module-btn" onclick="selectModule('chemistry')">⚗️ Chemistry</button>
+                <button class="module-btn" onclick="selectModule('physics')">🌌 Physics</button>
+            </div>
+
+            <!-- Biology Module -->
+            <div id="biology-module" class="module-display active">
+                <h4>Predator–Prey Dynamics</h4>
+                <p>Explore how prey and predator populations change together. Adjust parameters to see oscillations.</p>
+                <div class="module-controls">
+                    <label>Prey birth rate: <input type="range" min="0.2" max="1.5" step="0.05" value="0.8" id="bio-a"></label>
+                    <label>Hunt rate: <input type="range" min="0.005" max="0.05" step="0.005" value="0.02" id="bio-b"></label>
+                </div>
+                <canvas id="bioCanvas"></canvas>
+                <div class="module-notes">
+                    <div class="note-card">
+                        <h4>💡 Key concept</h4>
+                        <p>Prey grow when predators are few; predators grow when prey are abundant. This creates cycles.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chemistry Module -->
+            <div id="chemistry-module" class="module-display">
+                <h4>Reaction Rate & Activation Energy</h4>
+                <p>Increase temperature or catalyst strength to lower activation energy and speed up reactions.</p>
+                <div class="module-controls">
+                    <label>Temperature (K): <input type="range" min="250" max="800" step="10" value="300" id="chem-temp"></label>
+                    <label>Catalyst strength: <input type="range" min="0" max="1" step="0.05" value="0" id="chem-cat"></label>
+                </div>
+                <canvas id="chemCanvas"></canvas>
+                <div class="module-notes">
+                    <div class="note-card">
+                        <h4>💡 Key concept</h4>
+                        <p>Reactions cross an energy barrier (Ea). Higher temperature and catalysts both lower this barrier, speeding up the reaction.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physics Module -->
+            <div id="physics-module" class="module-display">
+                <h4>Projectile Motion</h4>
+                <p>Launch a projectile and see its trajectory. Adjust speed and angle to explore the physics.</p>
+                <div class="module-controls">
+                    <label>Speed (m/s): <input type="range" min="10" max="80" step="1" value="40" id="phys-speed"></label>
+                    <label>Angle (°): <input type="range" min="10" max="80" step="1" value="45" id="phys-angle"></label>
+                </div>
+                <canvas id="physCanvas"></canvas>
+                <div class="module-notes">
+                    <div class="note-card">
+                        <h4>💡 Key concept</h4>
+                        <p>With no air resistance, range is maximized near 45°. Horizontal and vertical motions combine to form the arc.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        if (raw) return JSON.parse(raw);
-        <div class="card">
-      } catch {}
-          <h4>What makes this different</h4>
-      return JSON.parse(JSON.stringify(defaultProgress));
-          <p>Blending conceptual clarity with strategic test skills—so students don’t just know the “what,” they master the “why” and the “how.”</p>
-    }
+    </section>
+
+    <!-- Options / Pricing -->
+    <section id="options">
+        <div class="container">
+            <h3>Tutoring options</h3>
+            <p class="sub">Choose what fits your schedule and goals. Ask about bundles and sibling discounts.</p>
+            <div class="cards">
+                <div class="card option">
+                    <h4>1:1 Session (60 min)</h4>
+                    <p>Personalized coaching, concept review, and targeted practice.</p>
+                    <p class="price">$75 per session</p>
+                </div>
+                <div class="card option">
+                    <h4>Weekly Coaching</h4>
+                    <p>One session per week, progress tracking, priority scheduling.</p>
+                    <p class="price">$270 per month</p>
+                </div>
+                <div class="card option">
+                    <h4>Exam Sprint (4 sessions)</h4>
+                    <p>Focused review plan with practice exams and feedback.</p>
+                    <p class="price">$280 package</p>
+                </div>
+                <div class="card option">
+                    <h4>Small Group (2–4 students)</h4>
+                    <p>Collaborative learning at a lower per-student rate.</p>
+                    <p class="price">$45 per student</p>
+                </div>
+            </div>
+            <p class="note">In‑person: Charlotte area. Online: Zoom with shared whiteboard and materials.</p>
         </div>
-    function saveProgress() {
-      </div>
-      localStorage.setItem('msgreene_progress', JSON.stringify(progress));
-    </div>
-      updateBadges();
-  </section>
-      renderNavProgress();
+    </section>
 
-    }
-  <section id="subjects">
-    function bumpStreak() {
-    <div class="container">
-      const today = new Date().toDateString();
-      <h3>Subjects and levels</h3>
-      if (progress.lastVisitDate !== today) {
-      <p class="sub">Core science courses plus enrichment and exam support.</p>
-        progress.streak += 1;
-      <div class="cards">
-        progress.lastVisitDate = today;
-        <div class="card">
-        showToast(`Streak ${progress.streak}!`, "Consistency builds mastery—nice work!");
-          <h4>Biology</h4>
-      }
-          <p>Cells, genetics, evolution, ecology, physiology, lab skills.</p>
-    }
-          <p class="meta">Middle school • Honors • AP Biology • Intro college</p>
-    function showToast(title, msg) {
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="container">
+            <h3>Parent and student reviews</h3>
+            <div class="cards">
+                <div class="card">
+                    <span class="avatar" aria-hidden="true"></span>
+                    <p class="quote">"My daughter went from overwhelmed to confident. Ms. Greene breaks tough topics into steps that finally make sense."</p>
+                    <p class="meta">— Parent of 10th grader</p>
+                </div>
+                <div class="card">
+                    <span class="avatar" aria-hidden="true"></span>
+                    <p class="quote">"AP Bio labs used to stress me out. The practice write‑ups and feedback were game‑changers."</p>
+                    <p class="meta">— 11th grade student</p>
+                </div>
+                <div class="card">
+                    <span class="avatar" aria-hidden="true"></span>
+                    <p class="quote">"Clear, patient, and organized. My son learned how to study—not just cram."</p>
+                    <p class="meta">— Parent of 9th grader</p>
+                </div>
+            </div>
         </div>
-      const toast = document.getElementById('toast');
-        <div class="card">
-      toast.querySelector('.title').textContent = title;
-          <h4>Chemistry</h4>
-      toast.querySelector('.msg').textContent = msg;
-          <p>Stoichiometry, thermochemistry, bonding, kinetics, equilibrium, lab safety.</p>
-      toast.style.display = 'block';
-          <p class="meta">General • Honors • AP Chemistry • Intro college</p>
-      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    </section>
+
+    <!-- Booking -->
+    <section id="booking">
+        <div class="container">
+            <h3>Book a session</h3>
+            <p class="sub">Tell me about your goals and schedule. I'll reply within 24 hours.</p>
+            <form class="form" id="bookingForm" aria-label="Booking form">
+                <div class="inline">
+                    <div>
+                        <label for="name">Student name</label>
+                        <input id="name" name="name" type="text" placeholder="e.g., Jordan Greene" required />
+                    </div>
+                    <div>
+                        <label for="email">Parent or student email</label>
+                        <input id="email" name="email" type="email" placeholder="you@example.com" required />
+                    </div>
+                </div>
+
+                <div class="inline">
+                    <div>
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Choose a subject</option>
+                            <option>Biology</option>
+                            <option>Chemistry</option>
+                            <option>Physics</option>
+                            <option>Exam Prep</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="level">Level</label>
+                        <select id="level" name="level" required>
+                            <option value="">Choose a level</option>
+                            <option>Middle School</option>
+                            <option>High School</option>
+                            <option>AP</option>
+                            <option>Intro College</option>
+                        </select>
+                    </div>
+                </div>
+
+                <label for="goals">Goals or topics</label>
+                <textarea id="goals" name="goals" placeholder="Tell me what you're working on..."></textarea>
+
+                <div class="inline">
+                    <div>
+                        <label for="format">Format</label>
+                        <select id="format" name="format" required>
+                            <option value="">Choose a format</option>
+                            <option>Online (Zoom)</option>
+                            <option>In‑person (Charlotte)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="times">Preferred times</label>
+                        <input id="times" name="times" type="text" placeholder="e.g., Tue/Thu 4–6 PM" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Request booking</button>
+                <p class="note">You'll receive a confirmation email with next steps.</p>
+            </form>
         </div>
-    }
-        <div class="card">
-    function updateBadges() {
-          <h4>Physics</h4>
-      const badge = document.getElementById('badge-overall');
-          <p>Mechanics, energy, waves, electricity & magnetism, problem strategies.</p>
-      const streak = document.getElementById('streak');
-          <p class="meta">Conceptual • Honors • AP Physics 1 • Intro college</p>
-      const total = topics.length;
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <h3>FAQs</h3>
+            <details>
+                <summary>What happens in a first session?</summary>
+                <p>We set goals, review a recent assignment or test, identify gaps, and build a plan. Students leave with a short practice task.</p>
+            </details>
+            <details>
+                <summary>Do you provide materials?</summary>
+                <p>Yes—guided notes, practice sets, and lab report templates tailored to your course.</p>
+            </details>
+            <details>
+                <summary>Can I use the interactive modules on my own?</summary>
+                <p>Absolutely! These modules are free tools to explore concepts anytime. They work great alongside tutoring sessions.</p>
+            </details>
+            <details>
+                <summary>Cancellation policy</summary>
+                <p>Reschedule up to 24 hours in advance at no charge. Same‑day cancellations billed at 50%.</p>
+            </details>
         </div>
-      const completedCount = topics.filter(t => progress.topics[t.key].completed).length;
-        <div class="card">
-      const pct = (completedCount / total) * 100;
-          <h4>Exam prep</h4>
-      let label = 'Starter Scientist';
-          <p>Unit reviews, practice tests, error analysis, time management, lab write‑ups.</p>
-      if (pct >= 20) label = 'Curious Explorer';
-          <p class="meta">AP • End‑of‑Course • Midterms • Finals</p>
-      if (pct >= 50) label = 'Data Detective';
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <h4 style="font-family:Poppins;margin:0 0 8px;">Ms. Greene the Science Queen</h4>
+                <p>Charlotte, NC • Online & In‑Person</p>
+                <p class="small">© <span id="year"></span> Ms. Greene. All rights reserved.</p>
+            </div>
+            <div>
+                <p><a href="#booking">Book a session</a></p>
+                <p><a href="mailto:hello@sciencequeen.com">hello@sciencequeen.com</a></p>
+            </div>
         </div>
-      if (pct >= 80) label = 'STEM Trailblazer';
-      </div>
-      if (pct >= 100) label = 'Science Queen Champion';
-    </div>
-      badge.textContent = label;
-  </section>
-      streak.textContent = `Streak: ${progress.streak}`;
+    </footer>
 
-    }
-  <section id="options">
-    function renderNavProgress() {
-    <div class="container">
-      const nav = document.getElementById('nav');
-      <h3>Tutoring options</h3>
-      [...nav.children].forEach(tab => {
-      <p class="sub">Choose what fits your schedule and goals. Ask about bundles and sibling discounts.</p>
-        const key = tab.dataset.key;
-      <div class="cards">
-        const tp = progress.topics[key];
-        <div class="card option">
-        tab.classList.remove('done', 'partial');
-          <h4>1:1 Session (60 min)</h4>
-        const dot = tab.querySelector('.progress-dot');
-          <p>Personalized coaching, concept review, and targeted practice.</p>
-        if (tp.completed) tab.classList.add('done');
-          <p class="price">$75 per session</p>
-        else if (tp.quizScore > 0 || tp.interactions > 2) tab.classList.add('partial');
-        </div>
-        dot.setAttribute('title', tp.completed ? 'Completed' : (tab.classList.contains('partial') ? 'In progress' : 'Not started'));
-        <div class="card option">
-      });
-          <h4>Weekly Coaching</h4>
-    }
-          <p>One session per week, progress tracking, priority scheduling.</p>
-    bumpStreak();
-          <p class="price">$270 per month</p>
+    <script>
+        // Year stamp
+        document.getElementById('year').textContent = new Date().getFullYear());
 
-        </div>
-    /* ===========================
-        <div class="card option">
-       Accessibility: keyboard nav
-          <h4>Exam Sprint (4 sessions)</h4>
-       =========================== */
-          <p>Focused review plan with practice exams and feedback.</p>
-    document.addEventListener('keydown', (e) => {
-          <p class="price">$280 package</p>
-      const keys = topics.map(t => t.key);
-        </div>
-      const activeKey = document.querySelector('.tab.active')?.dataset.key;
-        <div class="card option">
-      const idx = keys.indexOf(activeKey);
-          <h4>Small Group (2–4 students)</h4>
-      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-          <p>Collaborative learning at a lower per-student rate.</p>
-        const next = keys[Math.min(keys.length-1, idx+1)];
-          <p class="price">$45 per student</p>
-        if (next) selectTab(next);
-        </div>
-      }
-      </div>
-      if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-      <p class="note">In‑person: Charlotte area. Online: Zoom with shared whiteboard and materials.</p>
-        const prev = keys[Math.max(0, idx-1)];
-    </div>
-        if (prev) selectTab(prev);
-  </section>
-      }
-
-      if (e.key.toLowerCase() === 'h') selectTab('biology');
-  <section id="testimonials">
-      if (e.key.toLowerCase() === 'c') selectTab('chemistry');
-    <div class="container">
-      if (e.key.toLowerCase() === 'a') selectTab('anatomy');
-      <h3>Parent and student reviews</h3>
-      if (e.key.toLowerCase() === 'p') selectTab('physical');
-      <div class="cards">
-      if (e.key.toLowerCase() === 'm') selectTab('marine');
-        <div class="card">
-      if (e.key.toLowerCase() === 'e') selectTab('earth');
-          <span class="avatar"></span>
-      if (e.key.toLowerCase() === 'b') selectTab('biomedical');
-          <p class="quote">“My daughter went from overwhelmed to confident. Ms. Greene breaks tough topics into steps that finally make sense.”</p>
-    });
-          <p class="meta">— Parent of 10th grader</p>
-
-        </div>
-    /* ===========================
-        <div class="card">
-       Build sidebar navigation
-          <span class="avatar"></span>
-       =========================== */
-          <p class="quote">“AP Bio labs used to stress me out. The practice write‑ups and feedback were game‑changers.”</p>
-    const nav = document.getElementById('nav');
-          <p class="meta">— 11th grade student</p>
-    topics.forEach((t, i) => {
-        </div>
-      const el = document.createElement('div');
-        <div class="card">
-      el.className = 'tab' + (i===0 ? ' active' : '');
-          <span class="avatar"></span>
-      el.dataset.key = t.key;
-          <p class="quote">“Clear, patient, and organized. My son learned how to study—not just cram.”</p>
-      el.setAttribute('role', 'button');
-          <p class="meta">— Parent of 9th grader</p>
-      el.setAttribute('tabindex', '0');
-        </div>
-      el.setAttribute('aria-label', `Open ${t.name}`);
-      </div>
-      el.innerHTML = `<div class="icon">${t.icon}</div><div>${t.name}</div><div class="progress-dot" aria-hidden="true"></div>`;
-    </div>
-      el.addEventListener('click', () => selectTab(t.key));
-  </section>
-      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') selectTab(t.key); });
-
-      nav.appendChild(el);
-  <section id="booking">
-    });
-    <div class="container">
-
-      <h3>Book a session</h3>
-    const content = document.getElementById('content');
-      <p class="sub">Tell me about your goals and schedule. I’ll reply within 24 hours.</p>
-
-      <form class="form" id="bookingForm">
-    function selectTab(key) {
-        <div class="inline">
-      [...nav.children].forEach(c => c.classList.toggle('active', c.dataset.key === key));
-          <div>
-      content.innerHTML = '';
-            <label for="name">Student name</label>
-      panels[key]();
-            <input id="name" name="name" type="text" placeholder="e.g., Jordan Greene" required />
-      content.focus();
-          </div>
-    }
-          <div>
-
-            <label for="email">Parent or student email</label>
-    /* ===========================
-            <input id="email" name="email" type="email" placeholder="you@example.com" required />
-       Utilities: panels & UI
-          </div>
-       =========================== */
-        </div>
-    function makePanel(title, desc, topicKey) {
-
-      const panel = document.createElement('section');
-        <div class="inline">
-      panel.className = 'panel';
-          <div>
-      panel.setAttribute('aria-label', title);
-            <label for="subject">Subject</label>
-
-            <select id="subject" name="subject" required>
-      const h2 = document.createElement('h2'); h2.textContent = title;
-              <option value="">Choose a subject</option>
-      const p = document.createElement('div'); p.className = 'desc'; p.textContent = desc;
-              <option>Biology</option>
-      panel.appendChild(h2); panel.appendChild(p);
-              <option>Chemistry</option>
-
-              <option>Physics</option>
-      const a11y = document.createElement('div');
-              <option>Exam Prep</option>
-      a11y.className = 'a11y-controls';
-            </select>
-      const playBtn = makeButton('Play', 'primary');
-          </div>
-      const pauseBtn = makeButton('Pause', 'ghost');
-          <div>
-      const resetBtn = makeButton('Reset', 'ghost');
-            <label for="level">Level</label>
-      const exportBtn = makeButton('Export CSV', 'success');
-            <select id="level" name="level" required>
-
-              <option value="">Choose a level</option>
-      a11y.appendChild(playBtn);
-              <option>Middle School</option>
-      a11y.appendChild(pauseBtn);
-              <option>High School</option>
-      a11y.appendChild(resetBtn);
-              <option>AP</option>
-      a11y.appendChild(exportBtn);
-              <option>Intro College</option>
-      panel.appendChild(a11y);
-            </select>
-
-          </div>
-      playBtn.setAttribute('aria-label', 'Play animation');
-        </div>
-      pauseBtn.setAttribute('aria-label', 'Pause animation');
-
-      resetBtn.setAttribute('aria-label', 'Reset simulation');
-        <label for="goals">Goals or topics</label>
-      exportBtn.setAttribute('aria-label', 'Export data as CSV');
-        <textarea id="goals" name="goals" placeholder="Tell me what you’re working on..."></textarea>
-
-
-      const controls = document.createElement('div');
-        <div class="inline">
-      controls.className = 'controls';
-          <div>
-      panel.appendChild(controls);
-            <label for="format">Format</label>
-
-            <select id="format" name="format" required>
-      const notes = document.createElement('div');
-              <option value="">Choose a format</option>
-      notes.className = 'notes';
-              <option>Online (Zoom)</option>
-      panel.appendChild(notes);
-              <option>In‑person (Charlotte)</option>
-
-            </select>
-      const quiz = document.createElement('div');
-          </div>
-      quiz.className = 'quiz';
-          <div>
-      quiz.innerHTML = `<h3>Quiz: Check your understanding</h3><div class="q"></div><div class="feedback" aria-live="polite"></div><div class="celebrate"></div>`;
-            <label for="times">Preferred times</label>
-      panel.appendChild(quiz);
-            <input id="times" name="times" type="text" placeholder="e.g., Tue/Thu 4–6 PM" />
-
-          </div>
-      panel._controls = controls;
-        </div>
-      panel._playBtn = playBtn;
-
-      panel._pauseBtn = pauseBtn;
-        <button type="submit" class="btn">Request booking</button>
-      panel._resetBtn = resetBtn;
-        <p class="note">You’ll receive a confirmation email with next steps.</p>
-      panel._exportBtn = exportBtn;
-      </form>
-      panel._notes = notes;
-    </div>
-      panel._quiz = quiz;
-  </section>
-      panel._topicKey = topicKey;
-
-
-  <section id="faq">
-      content.appendChild(panel);
-    <div class="container">
-      return panel;
-      <h3>FAQs</h3>
-    }
-      <details>
-
-        <summary>What happens in a first session?</summary>
-    function makeButton(text, variant) {
-        <p>We set goals, review a recent assignment or test, identify gaps, and build a plan. Students leave with a short practice task.</p>
-      const b = document.createElement('button');
-      </details>
-      b.className = `btn ${variant}`;
-      <details>
-      b.textContent = text;
-        <summary>Do you provide materials?</summary>
-      b.type = 'button';
-        <p>Yes—guided notes, practice sets, and lab report templates tailored to your course.</p>
-      b.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') b.click(); });
-      </details>
-      return b;
-      <details>
-    }
-        <summary>Cancellation policy</summary>
-
-        <p>Reschedule up to 24 hours in advance at no charge. Same‑day cancellations billed at 50%.</p>
-    function addSlider(controls, label, min, max, step, value, oninput) {
-      </details>
-      const wrap = document.createElement('div');
-    </div>
-      const id = 's' + Math.random().toString(36).slice(2,7);
-  </section>
-      wrap.innerHTML =
-
-        `<label for="${id}">${label}</label>
-  <footer>
-         <input class="slider" id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${value}" aria-valuemin="${min}" aria-valuemax="${max}" aria-valuenow="${value}" aria-label="${label}">
-    <div class="container footer-grid">
-         <span class="readout">${value}</span>`;
-      <div>
-      const input = wrap.querySelector('input');
-        <h4 style="font-family:Poppins;margin:0 0 8px;">Ms. Greene the Science Queen</h4>
-      const readout = wrap.querySelector('.readout');
-        <p>Charlotte, NC • Online & In‑Person</p>
-      input.addEventListener('input', () => { readout.textContent = input.value; input.setAttribute('aria-valuenow', input.value); oninput(+input.value); markInteraction(); });
-        <p class="small">© <span id="year"></span> Ms. Greene. All rights reserved.</p>
-      controls.appendChild(wrap);
-      </div>
-      return input;
-      <div>
-    }
-        <p
-
-    function addNotes(panel, items) {
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'note-card';
-        card.innerHTML = `<h3>${item.title}</h3><p>${item.text}</p>${item.try ? `<p><strong>Try this:</strong> ${item.try}</p>` : ''}`;
-        panel._notes.appendChild(card);
-      });
-    }
-
-    function setupQuiz(panel, question, options, correctIndex, onDone) {
-      const qDiv = panel._quiz.querySelector('.q');
-      const feedback = panel._quiz.querySelector('.feedback');
-      const celebrate = panel._quiz.querySelector('.celebrate');
-      qDiv.innerHTML = `<p>${question}</p>`;
-      options.forEach((opt, i) => {
-        const id = 'q' + Math.random().toString(36).slice(2,7);
-        const label = document.createElement('label');
-        label.innerHTML = `<input type="radio" name="quiz" id="${id}" value="${i}"> ${opt}`;
-        qDiv.appendChild(label);
-      });
-      const submit = makeButton('Submit answer', 'primary');
-      panel._quiz.appendChild(submit);
-      submit.addEventListener('click', () => {
-        const selected = qDiv.querySelector('input[type="radio"]:checked');
-        if (!selected) { feedback.textContent = 'Select an answer to submit.'; feedback.style.color = '#f5c04e'; return; }
-        const idx = +selected.value;
-        const correct = idx === correctIndex;
-        feedback.textContent = correct ? 'Correct! 🎉' : 'Not quite—review the notes and try again.';
-        feedback.style.color = correct ? '#59d36c' : '#ff6666';
-        const tp = progress.topics[panel._topicKey];
-        tp.quizScore = Math.max(tp.quizScore, correct ? 1 : 0);
-        if (correct) {
-          tp.completed = true;
-          celebrate.style.display = 'block';
-          celebrate.innerHTML = `<div>🏆 You mastered ${topics.find(t=>t.key===panel._topicKey).name}! Keep going, your curiosity shines.</div>`;
-          showToast('Progress celebrated!', `You completed ${topics.find(t=>t.key===panel._topicKey).name}.`);
+        // Module switching
+        function selectModule(module) {
+            document.querySelectorAll('.module-display').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.module-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(module + '-module').classList.add('active');
+            event.target.classList.add('active');
+            
+            if (module === 'biology') initBiology();
+            else if (module === 'chemistry') initChemistry();
+            else if (module === 'physics') initPhysics();
         }
-        saveProgress();
-        if (onDone) onDone(correct);
-      });
-    }
 
-    function markInteraction(topicKeyOverride) {
-      const key = topicKeyOverride || document.querySelector('.tab.active').dataset.key;
-      const tp = progress.topics[key];
-      tp.interactions += 1;
-      saveProgress();
-    }
-
-    function exportCSV(filename, headers, rows) {
-      const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-      const blob = new Blob([csv], { type: 'text/csv' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click();
-      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 0);
-      showToast('Data exported', 'Your CSV is ready for homework.');
-    }
-
-    /* ===========================
-       Panels: simulations
-       =========================== */
-
-    // Biology: Predator–Prey (Lotka–Volterra)
-    function biologyPanel() {
-      const panel = makePanel(
-        "Biology — Predator–Prey dynamics",
-        "Explore how prey and predator populations change together. Adjust birth and hunt rates to see oscillations.",
-        "biology"
-      );
-      const controls = panel._controls;
-      let a = 0.8, b = 0.02, c = 0.6, d = 0.015;
-      addSlider(controls, "Prey birth rate (a)", 0.2, 1.5, 0.05, a, v => a = v);
-      addSlider(controls, "Hunt rate (b)", 0.005, 0.05, 0.005, b, v => b = v);
-      addSlider(controls, "Predator death rate (c)", 0.2, 1.2, 0.05, c, v => c = v);
-      addSlider(controls, "Predator efficiency (d)", 0.005, 0.05, 0.005, d, v => d = v);
-
-      const canvas = document.createElement('canvas');
-      canvas.className = 'grid-bg';
-      canvas.setAttribute('role', 'img');
-      canvas.setAttribute('aria-label', 'Predator and prey population lines over time');
-      panel.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      function resize() { canvas.width = canvas.clientWidth; canvas.height = 340; }
-      resize(); window.addEventListener('resize', resize);
-
-      let prey = 40, pred = 9, running = true;
-      const trail = [];
-      function step() {
-        const dt = 0.02;
-        const dPrey = a*prey - b*prey*pred;
-        const dPred = d*prey*pred - c*pred;
-        prey += dPrey * dt; pred += dPred * dt;
-        prey = Math.max(0, Math.min(200, prey));
-        pred = Math.max(0, Math.min(200, pred));
-        trail.push({ prey, pred });
-        if (trail.length > 900) trail.shift();
-      }
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.strokeStyle = '#223154'; ctx.lineWidth = 1.2;
-        ctx.beginPath(); ctx.moveTo(40, 20); ctx.lineTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
-        const yScale = (v) => 320 - v * (280/200);
-        ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2; ctx.beginPath();
-        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.prey); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-        ctx.strokeStyle = '#ff8a66'; ctx.lineWidth = 2; ctx.beginPath();
-        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.pred); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-        const legend = panel.querySelector('.legend') || (() => {
-          const l = document.createElement('div'); l.className = 'legend'; l.innerHTML =
-            '<span><i class="a"></i>Prey</span><span><i class="b"></i>Predators</span>';
-          panel.appendChild(l); return l;
-        })();
-      }
-      function loop(){ if(running){ step(); draw(); } requestAnimationFrame(loop); }
-      loop();
-
-      panel._playBtn.addEventListener('click', () => { running = true; markInteraction('biology'); });
-      panel._pauseBtn.addEventListener('click', () => { running = false; });
-      panel._resetBtn.addEventListener('click', () => { prey = 40; pred = 9; trail.length = 0; draw(); });
-      panel._exportBtn.addEventListener('click', () => {
-        const rows = trail.map((pt, i) => [i, pt.prey.toFixed(3), pt.pred.toFixed(3)]);
-        exportCSV('biology_predator_prey.csv', ['t_index','prey','predators'], rows);
-      });
-
-      addNotes(panel, [
-        { title: 'Coupled populations', text: 'Prey grow when predators are few; predators grow when prey are abundant.', try: 'Increase prey birth rate and observe predator lag.' },
-        { title: 'Balance of rates', text: 'Hunt rate and predator death shape the amplitude and period of cycles.', try: 'Lower predator death and watch how long peaks last.' }
-      ]);
-      setupQuiz(panel,
-        'In a predator–prey system, increasing predator death rate (c) typically causes:',
-        ['Higher predator peaks', 'Lower predator numbers and shorter cycles', 'No change to dynamics', 'Immediate extinction of prey'],
-        1
-      );
-    }
-
-    // Chemistry: Reaction progress & energy profile
-    function chemistryPanel() {
-      const panel = makePanel(
-        "Chemistry — Reaction rate and energy barrier",
-        "Increase temperature or catalyst strength to lower activation energy and speed up product formation.",
-        "chemistry"
-      );
-      const controls = panel._controls;
-      let temp = 300, catalyst = 0;
-      addSlider(controls, "Temperature (K)", 250, 800, 10, temp, v => temp = v);
-      addSlider(controls, "Catalyst strength", 0, 1, 0.05, catalyst, v => catalyst = v);
-
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('viewBox','0 0 960 340');
-      svg.setAttribute('role','img');
-      svg.setAttribute('aria-label','Energy profile curve and reaction progress bar');
-      panel.appendChild(svg);
-      function draw() {
-        svg.innerHTML = '';
-        const g = (tag, attrs={}, children=[]) => {
-          const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
-          Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v)); children.forEach(c=>el.appendChild(c));
-          return el;
-        };
-        svg.appendChild(g('rect', { x:0,y:0,width:960,height:340, fill:'#0c1328' }));
-
-        const EaBase = 80;
-        const Ea = EaBase * (1 - 0.6 * catalyst);
-        const k = Math.exp(-Ea / (0.001 * temp));
-
-        const path = [];
-        for (let x=0; x<=940; x+=10) {
-          const progress = x/940;
-          const react = 120, prod = 60;
-          const peak = 60 + Ea;
-          const y = react*(1-progress) + prod*progress + peak*Math.exp(-Math.pow(progress-0.5,2)/0.02);
-          path.push(`${x},${340 - y}`);
-        }
-        svg.appendChild(g('polyline', { points: path.join(' '), fill:'none', stroke:'#66e0ff', 'stroke-width':2 }));
-
-        const P = Math.min(1, k*0.02);
-        const barW = 340;
-        const formed = Math.min(barW, barW * (P*40));
-        svg.appendChild(g('rect', { x:580, y:260, width:barW, height:18, fill:'#223154', rx:9 }));
-        svg.appendChild(g('rect', { x:580, y:260, width:formed, height:18, fill:'#59d36c', rx:9 }));
-        svg.appendChild(g('text', { x:580, y:250, fill:'#9fb3cc', 'font-size':12 }, [document.createTextNode(`Rate rises with temperature; catalyst lowers barrier`)]));
-      }
-      draw();
-      panel.addEventListener('input', () => { draw(); markInteraction('chemistry'); });
-
-      panel._playBtn.addEventListener('click', () => { markInteraction('chemistry'); });
-      panel._pauseBtn.addEventListener('click', () => {});
-      panel._resetBtn.addEventListener('click', () => { temp = 300; catalyst = 0; draw(); });
-      panel._exportBtn.addEventListener('click', () => {
-        const rows = [];
-        for (let x=0; x<=940; x+=10) {
-          const progress = x/940;
-          const react = 120, prod = 60;
-          const EaBase = 80, Ea = EaBase * (1 - 0.6 * catalyst);
-          const peak = 60 + Ea;
-          const y = react*(1-progress) + prod*progress + peak*Math.exp(-Math.pow(progress-0.5,2)/0.02);
-          rows.push([x, progress.toFixed(4), y.toFixed(3)]);
-        }
-        exportCSV('chemistry_energy_profile.csv', ['x','progress','energy'], rows);
-      });
-
-      addNotes(panel, [
-        { title: 'Activation energy', text: 'Reactions cross an energy barrier (Ea) to form products.', try: 'Increase catalyst strength to reduce the peak height.' },
-        { title: 'Temperature effect', text: 'Higher temperature increases the rate constant k.', try: 'Raise temperature and watch the progress bar accelerate.' }
-      ]);
-      setupQuiz(panel,
-        'A catalyst speeds a reaction primarily by:',
-        ['Increasing reactant concentration', 'Lowering the activation energy', 'Heating the system', 'Consuming products'],
-        1
-      );
-    }
-
-    // Anatomy: Breathing simulator
-    function anatomyPanel() {
-      const panel = makePanel(
-        "Human Anatomy — Breathing and lung volume",
-        "Control breath depth and rate to see changes in tidal volume and minute ventilation.",
-        "anatomy"
-      );
-      const controls = panel._controls;
-      let depth = 0.5, rate = 12;
-      addSlider(controls, "Breath depth", 0.2, 1.0, 0.05, depth, v => depth = v);
-      addSlider(controls, "Breath rate (per min)", 6, 24, 1, rate, v => rate = v);
-
-      const canvas = document.createElement('canvas');
-      canvas.className = 'grid-bg';
-      canvas.setAttribute('role','img');
-      canvas.setAttribute('aria-label','Lung volume indicator with breathing waveform');
-      panel.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
-
-      const vitalCapacity = 4.5, residual = 1.2;
-      let t = 0, running = true;
-      const trace = [];
-
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = '#1a2650'; ctx.strokeStyle = '#2a3a63';
-        ctx.beginPath(); ctx.moveTo(canvas.width*0.5, 60);
-        ctx.bezierCurveTo(canvas.width*0.3, 80, canvas.width*0.25, 240, canvas.width*0.45, 300);
-        ctx.bezierCurveTo(canvas.width*0.55, 240, canvas.width*0.7, 80, canvas.width*0.5, 60);
-        ctx.fill(); ctx.stroke();
-
-        const breathsPerSec = rate/60;
-        const tidal = depth * vitalCapacity;
-        const volume = residual + tidal * (0.5*(Math.sin(2*Math.PI*breathsPerSec*t) + 1));
-        const y = 320 - (volume / (residual+vitalCapacity)) * 280;
-        ctx.fillStyle = '#66e0ff';
-        ctx.fillRect(60, y, canvas.width-120, 6);
-
-        ctx.fillStyle = '#9fb3cc'; ctx.font = '12px Segoe UI';
-        ctx.fillText(`Tidal volume: ${tidal.toFixed(2)} L`, 60, 24);
-        ctx.fillText(`Minute ventilation: ${(tidal*rate).toFixed(2)} L/min`, 60, 40);
-
-        trace.push([t.toFixed(3), tidal.toFixed(3), rate, volume.toFixed(3)]);
-        if (trace.length > 900) trace.shift();
-
-        if (running) t += 0.016;
-        requestAnimationFrame(draw);
-      }
-      draw();
-
-      panel._playBtn.addEventListener('click', () => { running = true; markInteraction('anatomy'); });
-      panel._pauseBtn.addEventListener('click', () => { running = false; });
-      panel._resetBtn.addEventListener('click', () => { t = 0; trace.length = 0; });
-      panel._exportBtn.addEventListener('click', () => {
-        exportCSV('anatomy_breathing.csv', ['t','tidal_volume_L','rate_bpm','volume_L'], trace.slice(-600));
-      });
-
-      addNotes(panel, [
-        { title: 'Tidal volume', text: 'Air moved per breath; deeper breaths increase tidal volume.', try: 'Set depth to 1.0 and compare minute ventilation.' },
-        { title: 'Minute ventilation', text: 'Tidal volume × rate; both depth and rate influence it.', try: 'Keep depth low and raise rate—notice the trade-off.' }
-      ]);
-      setupQuiz(panel,
-        'Minute ventilation increases when:',
-        ['Depth decreases, rate decreases', 'Depth increases, rate decreases', 'Depth increases or rate increases', 'Neither changes'],
-        2
-      );
-    }
-
-    // Physical Science: Projectile motion
-    function physicalPanel() {
-      const panel = makePanel(
-        "Physical Science — Projectile motion",
-        "Launch a projectile and see its trajectory. Adjust speed and angle; gravity is constant.",
-        "physical"
-      );
-      const controls = panel._controls;
-      let speed = 40, angle = 45, g = 9.8;
-      addSlider(controls, "Speed (m/s)", 10, 80, 1, speed, v => speed = v);
-      addSlider(controls, "Angle (°)", 10, 80, 1, angle, v => angle = v);
-
-      const canvas = document.createElement('canvas');
-      canvas.className = 'grid-bg';
-      canvas.setAttribute('role','img');
-      canvas.setAttribute('aria-label','Projectile trajectory curve');
-      panel.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
-
-      function drawTrajectory() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2;
-        ctx.beginPath();
-        const rad = angle * Math.PI/180;
-        const vx = speed * Math.cos(rad);
-        const vy = speed * Math.sin(rad);
-        const scale = 6;
-        let x = 0, y = 0, t = 0, started = false;
-        while (y >= 0 && x < canvas.width/scale && t < 10) {
-          const px = 40 + x*scale;
-          const py = 320 - y*scale;
-          started ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
-          started = true;
-          t += 0.05;
-          x = vx * t;
-          y = vy * t - 0.5 * g * t*t;
-        }
-        ctx.stroke();
-        ctx.strokeStyle = '#223154'; ctx.beginPath(); ctx.moveTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
-      }
-      drawTrajectory();
-      panel.addEventListener('input', () => { drawTrajectory(); markInteraction('physical'); });
-
-      panel._playBtn.addEventListener('click', () => { drawTrajectory(); markInteraction('physical'); });
-      panel._pauseBtn.addEventListener('click', () => {});
-      panel._resetBtn.addEventListener('click', () => { speed = 40; angle = 45; drawTrajectory(); });
-      panel._exportBtn.addEventListener('click', () => {
-        const rows = [];
-        const rad = angle * Math.PI/180;
-        const vx = speed * Math.cos(rad);
-        const vy = speed * Math.sin(rad);
-        for (let t=0; t<=5; t+=0.05) {
-          const x = vx * t, y = vy * t - 0.5 * g * t*t;
-          if (y < 0) break;
-          rows.push([t.toFixed(2), x.toFixed(3), y.toFixed(3)]);
-        }
-        exportCSV('physical_projectile.csv', ['t_s','x_m','y_m'], rows);
-      });
-
-      addNotes(panel, [
-        { title: 'Launch angle', text: 'Neglecting air, range is maximized near 45°.', try: 'Sweep angles and observe trajectory height vs. range.' },
-        { title: 'Independence of motion', text: 'Horizontal and vertical motions combine to form the arc.', try: 'Hold speed, vary angle to see peak changes.' }
-      ]);
-      setupQuiz(panel,
-        'With no air resistance, the launch angle for maximum range on level ground is:',
-        ['30°', '45°', '60°', 'Depends only on speed'],
-        1
-      );
-    }
-
-    // Marine Science: Thermocline
-    function marinePanel() {
-      const panel = makePanel(
-        "Marine Science — Thermocline and mixed layer",
-        "Change wind mixing and sunlight to see how surface warms and the thermocline shifts.",
-        "marine"
-      );
-      const controls = panel._controls;
-      let wind = 0.4, sun = 0.6;
-      addSlider(controls, "Wind mixing", 0, 1, 0.05, wind, v => wind = v);
-      addSlider(controls, "Sunlight", 0, 1, 0.05, sun, v => sun = v);
-
-      const canvas = document.createElement('canvas');
-      canvas.className = 'grid-bg';
-      canvas.setAttribute('role','img');
-      canvas.setAttribute('aria-label','Ocean temperature profile by depth');
-      panel.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
-
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        const depthMax = 300;
-        const profile = [];
-        for (let z=0; z<=depthMax; z+=2) {
-          const mixDepth = 40 + 120*wind;
-          const surfaceT = 12 + 18*sun;
-          const deepT = 4 + 2*wind;
-          const t = z < mixDepth
-            ? surfaceT
-            : deepT + (surfaceT - deepT) * Math.exp(-(z-mixDepth)/60);
-          profile.push({ z, t });
-        }
-        for (let i=0; i<profile.length; i++) {
-          const y = 20 + profile[i].z;
-          const hue = 200 - profile[i].t*3;
-          ctx.fillStyle = `hsl(${hue}, 60%, 40%)`;
-          ctx.fillRect(80, y, canvas.width-160, 2);
-        }
-        ctx.fillStyle = '#9fb3cc'; ctx.font = '12px Segoe UI';
-        ctx.fillText('Surface mixed layer', 86, 40 + 120*wind);
-        ctx.fillText('Thermocline below mixed layer', 86, 60 + 120*wind);
-      }
-      draw();
-      panel.addEventListener('input', () => { draw(); markInteraction('marine'); });
-
-      panel._playBtn.addEventListener('click', () => { draw(); markInteraction('marine'); });
-      panel._pauseBtn.addEventListener('click', () => {});
-      panel._resetBtn.addEventListener('click', () => { wind = 0.4; sun = 0.6; draw(); });
-      panel._exportBtn.addEventListener('click', () => {
-        const rows = [];
-        for (let z=0; z<=300; z+=5) {
-          const mixDepth = 40 + 120*wind;
-          const surfaceT = 12 + 18*sun;
-          const deepT = 4 + 2*wind;
-          const t = z < mixDepth ? surfaceT : deepT + (surfaceT - deepT) * Math.exp(-(z-mixDepth)/60);
-          rows.push([z, t.toFixed(3)]);
-        }
-        exportCSV('marine_thermocline.csv', ['depth_m','temp_C'], rows);
-      });
-
-      addNotes(panel, [
-        { title: 'Mixed layer', text: 'Wind stirs the surface, making it nearly uniform in temperature.', try: 'Increase wind to deepen the mixed layer.' },
-        { title: 'Thermocline', text: 'Below the mixed layer, temperature drops rapidly with depth.', try: 'Reduce sun to cool the surface and steepen the gradient.' }
-      ]);
-      setupQuiz(panel,
-        'A stronger wind generally makes the mixed layer:',
-        ['Shallower and warmer', 'Deeper and more uniform', 'Disappear entirely', 'Unchanged'],
-        1
-      );
-    }
-
-    // Earth Science: Plate boundaries
-    function earthPanel() {
-      const panel = makePanel(
-        "Earth Science — Plate boundaries",
-        "Drag plates to see convergent (mountains), divergent (rifts), and transform (faults) interactions.",
-        "earth"
-      );
-      const canvas = document.createElement('canvas');
-      canvas.className = 'grid-bg';
-      canvas.setAttribute('role','img');
-      canvas.setAttribute('aria-label','Interactive plate boundary visualization');
-      panel.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
-
-      let plateA = { x: 240, y: 160, color: '#66e0ff' };
-      let plateB = { x: 720, y: 160, color: '#ff8a66' };
-      let dragging = null;
-
-      canvas.addEventListener('mousedown', e => {
-        const r = canvas.getBoundingClientRect();
-        const mx = e.clientX - r.left;
-        if (Math.abs(mx - plateA.x) < 140) dragging = 'A';
-        else if (Math.abs(mx - plateB.x) < 140) dragging = 'B';
-      });
-      window.addEventListener('mouseup', ()=> dragging = null);
-      window.addEventListener('mousemove', e => {
-        if (!dragging) return;
-        const r = canvas.getBoundingClientRect();
-        const mx = e.clientX - r.left;
-        if (dragging === 'A') plateA.x = Math.max(80, Math.min(canvas.width/2, mx));
-        if (dragging === 'B') plateB.x = Math.max(canvas.width/2, Math.min(canvas.width-80, mx));
-        markInteraction('earth');
-      });
-
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = '#0d1734'; ctx.fillRect(0,0,canvas.width,canvas.height);
-        ctx.fillStyle = plateA.color; ctx.fillRect(plateA.x-160, 120, 160, 80);
-        ctx.fillStyle = plateB.color; ctx.fillRect(plateB.x, 120, 160, 80);
-        const gap = plateB.x - plateA.x;
-        ctx.strokeStyle = '#9fb3cc'; ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(plateA.x, 120); ctx.lineTo(plateA.x, 200); ctx.moveTo(plateB.x, 120); ctx.lineTo(plateB.x, 200); ctx.stroke();
-
-        let label = '', visuals = () => {};
-        if (gap > 200) {
-          label = 'Divergent boundary — rift valley and mid-ocean ridge';
-          visuals = () => {
-            ctx.strokeStyle = '#59d36c';
-            ctx.beginPath();
-            ctx.moveTo(plateA.x+20, 200); ctx.lineTo(plateA.x+60, 160);
-            ctx.lineTo(plateA.x+100, 200); ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(plateB.x-20, 200); ctx.lineTo(plateB.x-60, 160);
-            ctx.lineTo(plateB.x-100, 200); ctx.stroke();
-          };
-        } else if (gap < 60) {
-          label = 'Convergent boundary — uplift and mountains';
-          visuals = () => {
-            ctx.fillStyle = '#f5c04e';
-            for (let i=0;i<5;i++){
-              const bx = (plateA.x + plateB.x)/2 - 40 + i*16;
-              const by = 320 - 60 - Math.random()*12;
-              ctx.beginPath(); ctx.moveTo(bx, by);
-              ctx.lineTo(bx+10, by+20); ctx.lineTo(bx-10, by+20); ctx.closePath(); ctx.fill();
+        // Biology: Predator-Prey
+        function initBiology() {
+            const canvas = document.getElementById('bioCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 300;
+            
+            const aInput = document.getElementById('bio-a');
+            const bInput = document.getElementById('bio-b');
+            
+            let prey = 40, pred = 9;
+            const trail = [];
+            let running = true;
+            
+            function step() {
+                const a = parseFloat(aInput.value);
+                const b = parseFloat(bInput.value);
+                const c = 0.6, d = 0.015;
+                const dt = 0.02;
+                const dPrey = a*prey - b*prey*pred;
+                const dPred = d*prey*pred - c*pred;
+                prey += dPrey * dt;
+                pred += dPred * dt;
+                prey = Math.max(0, Math.min(200, prey));
+                pred = Math.max(0, Math.min(200, pred));
+                trail.push({ prey, pred });
+                if (trail.length > 500) trail.shift();
             }
-          };
-        } else {
-          label = 'Transform boundary — lateral sliding and faults';
-          visuals = () => {
-            ctx.strokeStyle = '#ff6666';
-            ctx.setLineDash([6,4]);
-            ctx.beginPath(); ctx.moveTo((plateA.x+plateB.x)/2, 110); ctx.lineTo((plateA.x+plateB.x)/2, 230); ctx.stroke();
-            ctx.setLineDash([]);
-          };
+            
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = '#223154';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(30, 20);
+                ctx.lineTo(30, 280);
+                ctx.lineTo(canvas.width - 20, 280);
+                ctx.stroke();
+                
+                const yScale = (v) => 280 - v * (240/200);
+                
+                // Prey line
+                ctx.strokeStyle = '#66e0ff';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                trail.forEach((pt, i) => {
+                    const x = 30 + i * (canvas.width - 50) / 500;
+                    const y = yScale(pt.prey);
+                    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+                });
+                ctx.stroke();
+                
+                // Predator line
+                ctx.strokeStyle = '#ff8a66';
+                ctx.beginPath();
+                trail.forEach((pt, i) => {
+                    const x = 30 + i * (canvas.width - 50) / 500;
+                    const y = yScale(pt.pred);
+                    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+                });
+                ctx.stroke();
+                
+                if (running) step();
+                requestAnimationFrame(draw);
+            }
+            
+            draw();
         }
-        visuals();
-        ctx.fillStyle = '#9fb3cc'; ctx.font = '12px Segoe UI';
-        ctx.fillText(label, 60, 40);
-        requestAnimationFrame(draw);
-      }
-      draw();
 
-      panel._playBtn.addEventListener('click', () => { markInteraction('earth'); });
-      panel._pauseBtn.addEventListener('click', () => {});
-      panel._resetBtn.addEventListener('click', () => { plateA.x = 240; plateB.x = 720; });
-      panel._exportBtn.addEventListener('click', () => {
-        exportCSV('earth_plate_boundary.csv', ['plateA_x','plateB_x','gap'], [[plateA.x, plateB.x, (plateB.x - plateA.x).toFixed(2)]]);
-      });
+        // Chemistry: Activation Energy
+        function initChemistry() {
+            const canvas = document.getElementById('chemCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 300;
+            
+            const tempInput = document.getElementById('chem-temp');
+            const catInput = document.getElementById('chem-cat');
+            
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                const temp = parseFloat(tempInput.value);
+                const catalyst = parseFloat(catInput.value);
+                const EaBase = 80;
+                const Ea = EaBase * (1 - 0.6 * catalyst);
+                
+                // Draw energy profile
+                ctx.strokeStyle = '#66e0ff';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                for (let x = 0; x <= canvas.width - 60; x += 10) {
+                    const progress = x / (canvas.width - 60);
+                    const react = 100, prod = 60;
+                    const peak = 60 + Ea;
+                    const y = react*(1-progress) + prod*progress + peak*Math.exp(-Math.pow(progress-0.5,2)/0.02);
+                    const py = 280 - y * (240/200);
+                    x ? ctx.lineTo(x + 30, py) : ctx.moveTo(x + 30, py);
+                }
+                ctx.stroke();
+                
+                // Draw axes
+                ctx.strokeStyle = '#223154';
+                ctx.beginPath();
+                ctx.moveTo(30, 280);
+                ctx.lineTo(canvas.width - 20, 280);
+                ctx.stroke();
+                
+                // Labels
+                ctx.fillStyle = '#9fb3cc';
+                ctx.font = '12px Arial';
+                ctx.fillText(`Temperature: ${temp}K`, 40, 30);
+                ctx.fillText(`Ea: ${Ea.toFixed(0)} kJ/mol`, 40, 50);
+                
+                requestAnimationFrame(draw);
+            }
+            
+            tempInput.addEventListener('input', draw);
+            catInput.addEventListener('input', draw);
+            draw();
+        }
 
-      addNotes(panel, [
-        { title: 'Three boundary types', text: 'Divergent (apart), convergent (together), transform (sideways).', try: 'Drag plates to cross thresholds and observe labels.' },
-        { title: 'Topography changes', text: 'Boundaries create ridges, mountains, and faults.', try: 'Narrow the gap to see mountain uplift.' }
-      ]);
-      setupQuiz(panel,
-        'A transform boundary is characterized by:',
-        ['Volcanic subduction', 'Sideways motion and faults', 'Seafloor spreading', 'Massive uplift'],
-        1
-      );
-    }
+        // Physics: Projectile Motion
+        function initPhysics() {
+            const canvas = document.getElementById('physCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = canvas.offsetWidth;
+            canvas.height = 300;
+            
+            const speedInput = document.getElementById('phys-speed');
+            const angleInput = document.getElementById('phys-angle');
+            
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                const speed = parseFloat(speedInput.value);
+                const angle = parseFloat(angleInput.value);
+                const g = 9.8;
+                const rad = angle * Math.PI / 180;
+                const vx = speed * Math.cos(rad);
+                const vy = speed * Math.sin(rad);
+                
+                // Draw trajectory
+                ctx.strokeStyle = '#66e0ff';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const scale = 3;
+                let started = false;
+                for (let t = 0; t <= 10; t += 0.1) {
+                    const x = vx * t;
+                    const y = vy * t - 0.5 * g * t * t;
+                    if (y < 0) break;
+                    const px = 50 + x * scale;
+                    const py = 250 - y * scale;
+                    started ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+                    started = true;
+                }
+                ctx.stroke();
+                
+                // Draw ground
+                ctx.strokeStyle = '#223154';
+                ctx.beginPath();
+                ctx.moveTo(50, 250);
+                ctx.lineTo(canvas.width - 20, 250);
+                ctx.stroke();
+                
+                // Labels
+                ctx.fillStyle = '#9fb3cc';
+                ctx.font = '12px Arial';
+                ctx.fillText(`Speed: ${speed} m/s | Angle: ${angle}°`, 50, 30);
+                
+                requestAnimationFrame(draw);
+            }
+            
+            speedInput.addEventListener('input', draw);
+            angleInput.addEventListener('input', draw);
+            draw();
+        }
 
-    // Biomedical Science: Epidemic curve (SIR)
-    function biomedicalPanel() {
-      const panel = makePanel(
-        "Biomedical Science — Epidemic curve",
-        "Adjust transmission and recovery to see how an outbreak spreads and subsides over time.",
-        "biomedical"
-      );
-      const controls = panel._controls;
-      let beta = 0.9, gamma = 0.2, N = 1000;
-      addSlider(controls, "Transmission (β)", 0.1, 1.5, 0.05, beta, v => beta = v);
-      addSlider(controls, "Recovery (γ)", 0.05, 0.8, 0.05, gamma, v => gamma = v);
-
-      const canvas = document.createElement('canvas');
-      canvas.className = 'grid-bg';
-      canvas.setAttribute('role','img');
-      canvas.setAttribute('aria-label','SIR epidemic curve showing susceptible, infected, recovered');
-      panel.appendChild(canvas);
-      const ctx = canvas.getContext('2d');
-      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
-
-      let S = N - 1, I = 1, R = 0, running = true;
-      const trail = [];
-
-      function step() {
-        const dS = -beta * S * I / N;
-        const dI = beta * S * I / N - gamma * I;
-        const dR = gamma * I;
-        S += dS; I += dI; R += dR;
-        S = Math.max(0, S); I = Math.max(0, I); R = Math.max(0, R);
-        trail.push({ S, I, R });
-        if (trail.length > 900) trail.shift();
-      }
-
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ctx.strokeStyle = '#223154'; ctx.lineWidth = 1.2;
-        ctx.beginPath(); ctx.moveTo(40, 20); ctx.lineTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
-
-        const yScale = (v) => 320 - v * (280/N);
-
-        ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2; ctx.beginPath();
-        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.S); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-
-        ctx.strokeStyle = '#ff8a66'; ctx.lineWidth = 2; ctx.beginPath();
-        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.I); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-
-        ctx.strokeStyle = '#59d36c'; ctx.lineWidth = 2; ctx.beginPath();
-        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.R); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-
-        const legend = panel.querySelector('.legend') || (() => {
-          const l = document.createElement('div'); l.className = 'legend'; l.innerHTML =
-            '<span><i class="a"></i>Susceptible</span><span><i class="b"></i>Infected</span><span><i class="g"></i>Recovered</span>';
-          panel.appendChild(l); return l;
-        })();
-
-        if (running) step();
-        requestAnimationFrame(draw);
-      }
-      draw();
-
-      panel._playBtn.addEventListener('click', () => { running = true; markInteraction('biomedical'); });
-      panel._pauseBtn.addEventListener('click', () => { running = false; });
-      panel._resetBtn.addEventListener('click', () => { S = N - 1; I = 1; R = 0; trail.length = 0; });
-      panel._exportBtn.addEventListener('click', () => {
-        const rows = trail.map((pt, i) => [i, pt.S.toFixed(1), pt.I.toFixed(1), pt.R.toFixed(1)]);
-        exportCSV('biomedical_epidemic.csv', ['t_day','susceptible','infected','recovered'], rows);
-      });
-
-      addNotes(panel, [
-        { title: 'SIR model', text: 'Populations move from Susceptible → Infected → Recovered.', try: 'Increase transmission to see a sharper peak.' },
-        { title: 'Flattening the curve', text: 'Higher recovery (γ) or lower transmission (β) reduces peak infected.', try: 'Raise recovery rate and watch the infected curve flatten.' }
-      ]);
-      setupQuiz(panel,
-        'In an SIR model, reducing transmission (β) primarily:',
-        ['Speeds disease spread', 'Flattens and delays the infected peak', 'Eliminates recovery', 'Has no effect'],
-        1
-      );
-    }
-
-    /* ===========================
-       Panel registry
-       =========================== */
-    const panels = {
-      biology: biologyPanel,
-      chemistry: chemistryPanel,
-      anatomy: anatomyPanel,
-      physical: physicalPanel,
-      marine: marinePanel,
-      earth: earthPanel,
-      biomedical: biomedicalPanel
-    };
-
-    // Initialize with first panel
-    selectTab('biology');
-  </script>
+        // Booking form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target).entries());
+            alert('Thanks, ' + (data.name || 'there') + '! Your request has been received. Check your email for next steps.');
+            // TODO: Integrate with Formspree, Netlify Forms, or EmailJS
+            e.target.reset();
+        });
+    </script>
 </body>
 </html>
