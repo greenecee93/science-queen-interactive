@@ -1,19 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
+@@ -2,1042 +2,322 @@
+ <html lang="en">
+ <html lang="en">
+ <head>
+ <head>
+   <meta charset="UTF-8" />
+   <meta charset="UTF-8" />
   <title>Ms. Greene the Science Queen — Interactive STEM Learning</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ms. Greene the Science Queen | Science Tutoring</title>
+  <meta name="description" content="Personalized science tutoring that turns curiosity into confidence. Middle school through AP and intro college-level support." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+   <style>
+   <style>
+     :root {
+     :root {
       --bg: #0a0f21;
+      --emerald: #1B8E5A;
       --panel: #141a2f;
+      --purple: #6A35A1;
       --accent: #66e0ff;
+      --mint: #E8F7F1;
       --accent2: #ff8a66;
+      --charcoal: #1E1E1E;
       --accent3: #c792ea;
+      --ink: #2E2E2E;
       --text: #eaf2ff;
+      --light: #FFFFFF;
       --muted: #9fb3cc;
+      --gray: #F5F5F7;
       --good: #59d36c;
+      --accent: #FFD452;
       --warn: #f5c04e;
       --bad: #ff6666;
       --brand1: #242b4f;
@@ -21,67 +43,128 @@
       --gold: #ffd266;
       --purple: #7a5cff;
       --pink: #ff78c3;
-    }
-    * { box-sizing: border-box; }
+     }
+     }
+     * { box-sizing: border-box; }
+     * { box-sizing: border-box; }
     body {
+    html, body { margin:0; padding:0; }
       margin: 0;
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--ink); background: var(--light); line-height: 1.6; }
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue";
+
       color: var(--text);
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
       background:
+    header { position: sticky; top:0; background: rgba(255,255,255,0.92); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid #eee; z-index: 50; }
         radial-gradient(1200px 600px at 20% 0%, #131a33, var(--bg)),
+    .nav { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; }
         linear-gradient(180deg, var(--brand1), var(--brand2));
+    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; }
     }
+    .crown { width:36px; height:36px; border-radius:8px; background: linear-gradient(135deg, var(--emerald), var(--purple)); display:flex; align-items:center; justify-content:center; color:white; font-weight:800; font-family:Poppins; }
 
+    .brand h1 { font-family:Poppins, sans-serif; font-weight:800; font-size:18px; margin:0; color: var(--charcoal); }
     /* Header & Branding */
+    nav a { color: var(--charcoal); text-decoration:none; padding:10px 12px; border-radius:8px; font-weight:600; }
     header {
+    nav a:hover { background: var(--gray); }
       padding: 16px 20px;
+    .cta { background: var(--emerald); color: white; }
       position: sticky; top: 0; z-index: 60; backdrop-filter: blur(8px);
+    .cta:hover { background: #157349; }
       border-bottom: 1px solid #243252; background: rgba(10, 14, 28, 0.7);
+
     }
+    .hero { background: linear-gradient(180deg, var(--mint), #ffffff); border-bottom:1px solid #eee; }
     .brand {
+    .hero-inner { display:grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items:center; padding: 56px 0; }
       display: grid; grid-template-columns: 56px 1fr auto; gap: 12px; align-items: center;
+    .hero h2 { font-family:Poppins; font-size:42px; line-height:1.2; margin:0 0 12px; color: var(--charcoal); }
     }
+    .hero p { font-size:18px; margin:0 0 20px; }
     .avatar {
+    .hero .badge { display:inline-flex; align-items:center; gap:8px; background: var(--accent); color: #3a2a00; padding:8px 12px; border-radius:999px; font-weight:700; }
       width: 56px; height: 56px; border-radius: 50%; overflow: hidden;
+    .hero .card { background:white; border:1px solid #eee; border-radius:16px; padding:18px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
       box-shadow: 0 0 22px #7a5cff44; border: 2px solid #7a5cff;
+    .hero .list { display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:12px; }
       display: grid; place-items: center; background: #0f1430;
-    }
-    .avatar svg { width: 44px; height: 44px; }
-    .title-wrap h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
-    .title-wrap .subtitle { color: var(--muted); font-size: 13px; }
-    .progress-badges { display: flex; gap: 8px; align-items: center; }
-    .badge {
-      font-size: 12px; color: #0b0e1f; background: var(--gold);
-      padding: 6px 8px; border-radius: 999px; border: 1px solid #f2c44d;
-      box-shadow: 0 3px 10px rgba(255,210,102,0.25);
-    }
-    .streak {
-      font-size: 12px; color: var(--text); background: #20305f;
-      padding: 6px 8px; border-radius: 999px; border: 1px solid #3b4f8a;
+    .chip { background: var(--gray); padding:8px 12px; border-radius:999px; font-weight:600; }
     }
 
+    .avatar svg { width: 44px; height: 44px; }
+    section { padding: 56px 0; }
+    .title-wrap h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
+    h3 { font-family:Poppins; font-size:28px; margin:0 0 12px; color: var(--charcoal); }
+    .title-wrap .subtitle { color: var(--muted); font-size: 13px; }
+    .sub { color:#666; margin-bottom:24px; }
+    .progress-badges { display: flex; gap: 8px; align-items: center; }
+
+    .badge {
+    .cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+      font-size: 12px; color: #0b0e1f; background: var(--gold);
+    .card { background:white; border:1px solid #eee; border-radius:16px; padding:18px; }
+      padding: 6px 8px; border-radius: 999px; border: 1px solid #f2c44d;
+    .card h4 { font-family:Poppins; margin:0 0 8px; font-size:18px; }
+      box-shadow: 0 3px 10px rgba(255,210,102,0.25);
+    .card .meta { color:#666; font-size:14px; }
+    }
+
+    .streak {
+    .price { font-weight:800; color: var(--purple); font-size:22px; }
+      font-size: 12px; color: var(--text); background: #20305f;
+    .option { display:flex; flex-direction:column; gap:8px; }
+      padding: 6px 8px; border-radius: 999px; border: 1px solid #3b4f8a;
+
+    }
+    .quote { font-style:italic; color:#333; }
+
+    .avatar { width:40px; height:40px; border-radius:999px; background: var(--mint); display:inline-block; margin-right:10px; border: 1px solid #ddd; }
     .layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 88px); }
+
     nav {
+    .form { background:white; border:1px solid #eee; border-radius:16px; padding:20px; }
       border-right: 1px solid #243252; padding: 16px; background: linear-gradient(180deg, #0e152a, #0b1020 50%);
+    label { display:block; font-weight:600; margin:12px 0 6px; }
     }
+    input, select, textarea { width:100%; padding:12px; border:1px solid #ddd; border-radius:10px; font:inherit; }
     .tab {
+    textarea { min-height:110px; }
       display: grid; grid-template-columns: 24px 1fr auto; align-items: center;
+    .inline { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
       gap: 10px; padding: 10px 12px; margin-bottom: 6px; border-radius: 10px; cursor: pointer;
+    .btn { display:inline-block; border:none; background: var(--emerald); color:white; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer; }
       color: var(--text); border: 1px solid transparent;
+    .btn:hover { background:#157349; }
     }
+    .note { font-size:13px; color:#666; margin-top:8px; }
     .tab:hover { background: #111936; border-color: #1f2a47; }
+
     .tab.active { background: #152044; border-color: #2a3a63; box-shadow: inset 0 0 0 1px #2a3a63; }
+    details { background:white; border:1px solid #eee; border-radius:12px; padding:12px 16px; margin-bottom:12px; }
     .tab .icon { font-size: 16px; }
+    summary { cursor:pointer; font-weight:700; }
     .tab .progress-dot {
+
       width: 10px; height: 10px; border-radius: 50%;
+    footer { background: var(--charcoal); color:#ddd; }
       background: #223154; border: 1px solid #2a3a63;
+    footer a { color:#fff; text-decoration: none; }
     }
+    .footer-grid { display:grid; grid-template-columns: 2fr 1fr; gap:24px; padding: 24px 0; }
     .tab.done .progress-dot { background: #59d36c; border-color: #59d36c; }
+    .small { font-size:13px; color:#aaa; }
     .tab.partial .progress-dot { background: #f5c04e; border-color: #f5c04e; }
 
+
+    @media (max-width: 880px) {
     main { padding: 20px; }
+      .hero-inner { grid-template-columns: 1fr; }
     .panel {
+      .inline { grid-template-columns: 1fr; }
       background: linear-gradient(180deg, #12172b, #101428);
+      .footer-grid { grid-template-columns: 1fr; }
       border: 1px solid #243252; border-radius: 14px; padding: 16px; margin-bottom: 16px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     }
@@ -156,15 +239,24 @@
       .layout { grid-template-columns: 1fr; }
       nav { border-right: none; border-bottom: 1px solid #243252; }
       header { position: static; }
-    }
-  </style>
-</head>
-<body>
+     }
+     }
+   </style>
+   </style>
+ </head>
+ </head>
+ <body>
+ <body>
   <header aria-label="Site header">
+
     <div class="brand">
+  <header>
       <div class="avatar" aria-hidden="true">
+    <div class="container nav">
         <!-- Simple illustrated avatar of a Black female STEM scientist -->
+      <a class="brand" href="#top">
         <svg viewBox="0 0 64 64" role="img" aria-label="Ms. Greene the Science Queen">
+        <div class="crown">Q</div>
           <defs>
             <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0" stop-color="#2b1e16"></stop>
@@ -189,234 +281,464 @@
         </svg>
       </div>
       <div class="title-wrap">
-        <h1>Ms. Greene the Science Queen</h1>
+         <h1>Ms. Greene the Science Queen</h1>
+         <h1>Ms. Greene the Science Queen</h1>
         <div class="subtitle">Interactive explorations across Biology, Chemistry, Human Anatomy, Physical, Marine, Earth, and Biomedical Sciences</div>
+      </a>
       </div>
+      <nav>
       <div class="progress-badges" aria-live="polite">
+        <a href="#about">About</a>
         <div class="badge" id="badge-overall">Starter Scientist</div>
+        <a href="#subjects">Subjects</a>
         <div class="streak" id="streak">Streak: 0</div>
+        <a href="#options">Tutoring</a>
       </div>
-    </div>
-  </header>
-
+        <a href="#testimonials">Reviews</a>
+        <a href="#booking" class="cta">Book a session</a>
+      </nav>
+     </div>
+     </div>
+   </header>
+   </header>
+ 
+ 
   <div class="layout">
+  <main id="top" class="hero">
     <nav id="nav" aria-label="Topics navigation">
+    <div class="container hero-inner">
       <!-- Tabs injected -->
+      <div>
     </nav>
+        <div class="badge">Charlotte • Online & In‑Person</div>
     <main id="content" tabindex="0" aria-live="polite" aria-label="Topic content">
+        <h2>Turning curiosity into confidence—one experiment at a time.</h2>
       <!-- Content injected -->
+        <p>I help middle school, high school, and intro college students master science with clear explanations, compassionate coaching, and structured practice.</p>
     </main>
+        <div class="list">
   </div>
+          <div class="chip">Biology • Chemistry • Physics</div>
 
+          <div class="chip">Honors • AP • STEM prep</div>
   <div class="toast" id="toast">
+        </div>
     <div class="title">You leveled up!</div>
+        <p class="note">Flexible scheduling, tailored plans, and progress updates for families.</p>
     <div class="msg">Keep going—your curiosity is your superpower.</div>
+        <a href="#booking" class="btn">Book a session</a>
   </div>
+      </div>
 
+      <div class="card">
   <div class="footer">© 2025 Ms. Greene the Science Queen — Learning through curiosity and celebration</div>
+        <h4>Fast facts</h4>
 
+        <ul>
   <script>
+          <li><strong>Experience:</strong> 8+ years teaching & tutoring</li>
     /* ===========================
+          <li><strong>Style:</strong> Concept-first, problem-based, test-smart</li>
        State: progress tracking
+          <li><strong>Students:</strong> Grades 6–12, AP, intro college</li>
        =========================== */
+          <li><strong>Format:</strong> Zoom or Charlotte-area in-person</li>
     const topics = [
+        </ul>
       { key: "biology", name: "Biology", icon: "🧬" },
+      </div>
       { key: "chemistry", name: "Chemistry", icon: "⚗️" },
+    </div>
       { key: "anatomy", name: "Human Anatomy", icon: "🫀" },
+  </main>
       { key: "physical", name: "Physical Science", icon: "🌌" },
+
       { key: "marine", name: "Marine Science", icon: "🐠" },
+  <section id="about">
       { key: "earth", name: "Earth Science", icon: "🌍" },
+    <div class="container">
       { key: "biomedical", name: "Biomedical Science", icon: "🧪" },
+      <h3>About Ms. Greene</h3>
     ];
+      <p class="sub">Science is more than memorizing facts—it’s learning how to think. I meet students where they are, build strong foundations, and connect ideas so they stick.</p>
     const defaultProgress = {
+      <div class="cards">
       streak: 0,
+        <div class="card">
       lastVisitDate: null,
+          <h4>Teaching philosophy</h4>
       topics: Object.fromEntries(topics.map(t => [t.key, { quizScore: 0, completed: false, interactions: 0 }]))
+          <p>I use everyday analogies, guided inquiry, and scaffolded problem sets. Students learn to explain concepts in their own words, then apply them in increasingly complex scenarios.</p>
     };
+        </div>
     const progress = loadProgress();
+        <div class="card">
     function loadProgress() {
+          <h4>Results you can expect</h4>
       try {
+          <p>Improved test scores, less anxiety, and stronger study habits. I share short feedback notes after sessions so families see progress and next steps.</p>
         const raw = localStorage.getItem('msgreene_progress');
+        </div>
         if (raw) return JSON.parse(raw);
+        <div class="card">
       } catch {}
+          <h4>What makes this different</h4>
       return JSON.parse(JSON.stringify(defaultProgress));
+          <p>Blending conceptual clarity with strategic test skills—so students don’t just know the “what,” they master the “why” and the “how.”</p>
     }
+        </div>
     function saveProgress() {
+      </div>
       localStorage.setItem('msgreene_progress', JSON.stringify(progress));
+    </div>
       updateBadges();
+  </section>
       renderNavProgress();
+
     }
+  <section id="subjects">
     function bumpStreak() {
+    <div class="container">
       const today = new Date().toDateString();
+      <h3>Subjects and levels</h3>
       if (progress.lastVisitDate !== today) {
+      <p class="sub">Core science courses plus enrichment and exam support.</p>
         progress.streak += 1;
+      <div class="cards">
         progress.lastVisitDate = today;
+        <div class="card">
         showToast(`Streak ${progress.streak}!`, "Consistency builds mastery—nice work!");
+          <h4>Biology</h4>
       }
+          <p>Cells, genetics, evolution, ecology, physiology, lab skills.</p>
     }
+          <p class="meta">Middle school • Honors • AP Biology • Intro college</p>
     function showToast(title, msg) {
+        </div>
       const toast = document.getElementById('toast');
+        <div class="card">
       toast.querySelector('.title').textContent = title;
+          <h4>Chemistry</h4>
       toast.querySelector('.msg').textContent = msg;
+          <p>Stoichiometry, thermochemistry, bonding, kinetics, equilibrium, lab safety.</p>
       toast.style.display = 'block';
+          <p class="meta">General • Honors • AP Chemistry • Intro college</p>
       setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        </div>
     }
+        <div class="card">
     function updateBadges() {
+          <h4>Physics</h4>
       const badge = document.getElementById('badge-overall');
+          <p>Mechanics, energy, waves, electricity & magnetism, problem strategies.</p>
       const streak = document.getElementById('streak');
+          <p class="meta">Conceptual • Honors • AP Physics 1 • Intro college</p>
       const total = topics.length;
+        </div>
       const completedCount = topics.filter(t => progress.topics[t.key].completed).length;
+        <div class="card">
       const pct = (completedCount / total) * 100;
+          <h4>Exam prep</h4>
       let label = 'Starter Scientist';
+          <p>Unit reviews, practice tests, error analysis, time management, lab write‑ups.</p>
       if (pct >= 20) label = 'Curious Explorer';
+          <p class="meta">AP • End‑of‑Course • Midterms • Finals</p>
       if (pct >= 50) label = 'Data Detective';
+        </div>
       if (pct >= 80) label = 'STEM Trailblazer';
+      </div>
       if (pct >= 100) label = 'Science Queen Champion';
+    </div>
       badge.textContent = label;
+  </section>
       streak.textContent = `Streak: ${progress.streak}`;
+
     }
+  <section id="options">
     function renderNavProgress() {
+    <div class="container">
       const nav = document.getElementById('nav');
+      <h3>Tutoring options</h3>
       [...nav.children].forEach(tab => {
+      <p class="sub">Choose what fits your schedule and goals. Ask about bundles and sibling discounts.</p>
         const key = tab.dataset.key;
+      <div class="cards">
         const tp = progress.topics[key];
+        <div class="card option">
         tab.classList.remove('done', 'partial');
+          <h4>1:1 Session (60 min)</h4>
         const dot = tab.querySelector('.progress-dot');
+          <p>Personalized coaching, concept review, and targeted practice.</p>
         if (tp.completed) tab.classList.add('done');
+          <p class="price">$75 per session</p>
         else if (tp.quizScore > 0 || tp.interactions > 2) tab.classList.add('partial');
+        </div>
         dot.setAttribute('title', tp.completed ? 'Completed' : (tab.classList.contains('partial') ? 'In progress' : 'Not started'));
+        <div class="card option">
       });
+          <h4>Weekly Coaching</h4>
     }
+          <p>One session per week, progress tracking, priority scheduling.</p>
     bumpStreak();
+          <p class="price">$270 per month</p>
 
+        </div>
     /* ===========================
+        <div class="card option">
        Accessibility: keyboard nav
+          <h4>Exam Sprint (4 sessions)</h4>
        =========================== */
+          <p>Focused review plan with practice exams and feedback.</p>
     document.addEventListener('keydown', (e) => {
+          <p class="price">$280 package</p>
       const keys = topics.map(t => t.key);
+        </div>
       const activeKey = document.querySelector('.tab.active')?.dataset.key;
+        <div class="card option">
       const idx = keys.indexOf(activeKey);
+          <h4>Small Group (2–4 students)</h4>
       if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+          <p>Collaborative learning at a lower per-student rate.</p>
         const next = keys[Math.min(keys.length-1, idx+1)];
+          <p class="price">$45 per student</p>
         if (next) selectTab(next);
+        </div>
       }
+      </div>
       if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      <p class="note">In‑person: Charlotte area. Online: Zoom with shared whiteboard and materials.</p>
         const prev = keys[Math.max(0, idx-1)];
+    </div>
         if (prev) selectTab(prev);
+  </section>
       }
+
       if (e.key.toLowerCase() === 'h') selectTab('biology');
+  <section id="testimonials">
       if (e.key.toLowerCase() === 'c') selectTab('chemistry');
+    <div class="container">
       if (e.key.toLowerCase() === 'a') selectTab('anatomy');
+      <h3>Parent and student reviews</h3>
       if (e.key.toLowerCase() === 'p') selectTab('physical');
+      <div class="cards">
       if (e.key.toLowerCase() === 'm') selectTab('marine');
+        <div class="card">
       if (e.key.toLowerCase() === 'e') selectTab('earth');
+          <span class="avatar"></span>
       if (e.key.toLowerCase() === 'b') selectTab('biomedical');
+          <p class="quote">“My daughter went from overwhelmed to confident. Ms. Greene breaks tough topics into steps that finally make sense.”</p>
     });
+          <p class="meta">— Parent of 10th grader</p>
 
+        </div>
     /* ===========================
+        <div class="card">
        Build sidebar navigation
+          <span class="avatar"></span>
        =========================== */
+          <p class="quote">“AP Bio labs used to stress me out. The practice write‑ups and feedback were game‑changers.”</p>
     const nav = document.getElementById('nav');
+          <p class="meta">— 11th grade student</p>
     topics.forEach((t, i) => {
+        </div>
       const el = document.createElement('div');
+        <div class="card">
       el.className = 'tab' + (i===0 ? ' active' : '');
+          <span class="avatar"></span>
       el.dataset.key = t.key;
+          <p class="quote">“Clear, patient, and organized. My son learned how to study—not just cram.”</p>
       el.setAttribute('role', 'button');
+          <p class="meta">— Parent of 9th grader</p>
       el.setAttribute('tabindex', '0');
+        </div>
       el.setAttribute('aria-label', `Open ${t.name}`);
+      </div>
       el.innerHTML = `<div class="icon">${t.icon}</div><div>${t.name}</div><div class="progress-dot" aria-hidden="true"></div>`;
+    </div>
       el.addEventListener('click', () => selectTab(t.key));
+  </section>
       el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') selectTab(t.key); });
+
       nav.appendChild(el);
+  <section id="booking">
     });
+    <div class="container">
 
+      <h3>Book a session</h3>
     const content = document.getElementById('content');
+      <p class="sub">Tell me about your goals and schedule. I’ll reply within 24 hours.</p>
 
+      <form class="form" id="bookingForm">
     function selectTab(key) {
+        <div class="inline">
       [...nav.children].forEach(c => c.classList.toggle('active', c.dataset.key === key));
+          <div>
       content.innerHTML = '';
+            <label for="name">Student name</label>
       panels[key]();
+            <input id="name" name="name" type="text" placeholder="e.g., Jordan Greene" required />
       content.focus();
+          </div>
     }
+          <div>
 
+            <label for="email">Parent or student email</label>
     /* ===========================
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
        Utilities: panels & UI
+          </div>
        =========================== */
+        </div>
     function makePanel(title, desc, topicKey) {
+
       const panel = document.createElement('section');
+        <div class="inline">
       panel.className = 'panel';
+          <div>
       panel.setAttribute('aria-label', title);
+            <label for="subject">Subject</label>
 
+            <select id="subject" name="subject" required>
       const h2 = document.createElement('h2'); h2.textContent = title;
+              <option value="">Choose a subject</option>
       const p = document.createElement('div'); p.className = 'desc'; p.textContent = desc;
+              <option>Biology</option>
       panel.appendChild(h2); panel.appendChild(p);
+              <option>Chemistry</option>
 
+              <option>Physics</option>
       const a11y = document.createElement('div');
+              <option>Exam Prep</option>
       a11y.className = 'a11y-controls';
+            </select>
       const playBtn = makeButton('Play', 'primary');
+          </div>
       const pauseBtn = makeButton('Pause', 'ghost');
+          <div>
       const resetBtn = makeButton('Reset', 'ghost');
+            <label for="level">Level</label>
       const exportBtn = makeButton('Export CSV', 'success');
+            <select id="level" name="level" required>
 
+              <option value="">Choose a level</option>
       a11y.appendChild(playBtn);
+              <option>Middle School</option>
       a11y.appendChild(pauseBtn);
+              <option>High School</option>
       a11y.appendChild(resetBtn);
+              <option>AP</option>
       a11y.appendChild(exportBtn);
+              <option>Intro College</option>
       panel.appendChild(a11y);
+            </select>
 
+          </div>
       playBtn.setAttribute('aria-label', 'Play animation');
+        </div>
       pauseBtn.setAttribute('aria-label', 'Pause animation');
+
       resetBtn.setAttribute('aria-label', 'Reset simulation');
+        <label for="goals">Goals or topics</label>
       exportBtn.setAttribute('aria-label', 'Export data as CSV');
+        <textarea id="goals" name="goals" placeholder="Tell me what you’re working on..."></textarea>
+
 
       const controls = document.createElement('div');
+        <div class="inline">
       controls.className = 'controls';
+          <div>
       panel.appendChild(controls);
+            <label for="format">Format</label>
 
+            <select id="format" name="format" required>
       const notes = document.createElement('div');
+              <option value="">Choose a format</option>
       notes.className = 'notes';
+              <option>Online (Zoom)</option>
       panel.appendChild(notes);
+              <option>In‑person (Charlotte)</option>
 
+            </select>
       const quiz = document.createElement('div');
+          </div>
       quiz.className = 'quiz';
+          <div>
       quiz.innerHTML = `<h3>Quiz: Check your understanding</h3><div class="q"></div><div class="feedback" aria-live="polite"></div><div class="celebrate"></div>`;
+            <label for="times">Preferred times</label>
       panel.appendChild(quiz);
+            <input id="times" name="times" type="text" placeholder="e.g., Tue/Thu 4–6 PM" />
 
+          </div>
       panel._controls = controls;
+        </div>
       panel._playBtn = playBtn;
+
       panel._pauseBtn = pauseBtn;
+        <button type="submit" class="btn">Request booking</button>
       panel._resetBtn = resetBtn;
+        <p class="note">You’ll receive a confirmation email with next steps.</p>
       panel._exportBtn = exportBtn;
+      </form>
       panel._notes = notes;
+    </div>
       panel._quiz = quiz;
+  </section>
       panel._topicKey = topicKey;
 
+
+  <section id="faq">
       content.appendChild(panel);
+    <div class="container">
       return panel;
+      <h3>FAQs</h3>
     }
+      <details>
 
+        <summary>What happens in a first session?</summary>
     function makeButton(text, variant) {
+        <p>We set goals, review a recent assignment or test, identify gaps, and build a plan. Students leave with a short practice task.</p>
       const b = document.createElement('button');
+      </details>
       b.className = `btn ${variant}`;
+      <details>
       b.textContent = text;
+        <summary>Do you provide materials?</summary>
       b.type = 'button';
+        <p>Yes—guided notes, practice sets, and lab report templates tailored to your course.</p>
       b.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') b.click(); });
+      </details>
       return b;
+      <details>
     }
+        <summary>Cancellation policy</summary>
 
+        <p>Reschedule up to 24 hours in advance at no charge. Same‑day cancellations billed at 50%.</p>
     function addSlider(controls, label, min, max, step, value, oninput) {
+      </details>
       const wrap = document.createElement('div');
+    </div>
       const id = 's' + Math.random().toString(36).slice(2,7);
+  </section>
       wrap.innerHTML =
+
         `<label for="${id}">${label}</label>
+  <footer>
          <input class="slider" id="${id}" type="range" min="${min}" max="${max}" step="${step}" value="${value}" aria-valuemin="${min}" aria-valuemax="${max}" aria-valuenow="${value}" aria-label="${label}">
+    <div class="container footer-grid">
          <span class="readout">${value}</span>`;
+      <div>
       const input = wrap.querySelector('input');
+        <h4 style="font-family:Poppins;margin:0 0 8px;">Ms. Greene the Science Queen</h4>
       const readout = wrap.querySelector('.readout');
+        <p>Charlotte, NC • Online & In‑Person</p>
       input.addEventListener('input', () => { readout.textContent = input.value; input.setAttribute('aria-valuenow', input.value); oninput(+input.value); markInteraction(); });
+        <p class="small">© <span id="year"></span> Ms. Greene. All rights reserved.</p>
       controls.appendChild(wrap);
+      </div>
       return input;
+      <div>
     }
+        <p
 
     function addNotes(panel, items) {
       items.forEach(item => {
@@ -981,15 +1303,15 @@
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.strokeStyle = '#223154'; ctx.lineWidth = 1.2;
         ctx.beginPath(); ctx.moveTo(40, 20); ctx.lineTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
-        
+
         const yScale = (v) => 320 - v * (280/N);
-        
+
         ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2; ctx.beginPath();
         trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.S); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-        
+
         ctx.strokeStyle = '#ff8a66'; ctx.lineWidth = 2; ctx.beginPath();
         trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.I); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-        
+
         ctx.strokeStyle = '#59d36c'; ctx.lineWidth = 2; ctx.beginPath();
         trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.R); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
 
