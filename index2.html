@@ -304,7 +304,7 @@
         const prev = keys[Math.max(0, idx-1)];
         if (prev) selectTab(prev);
       }
-      if (e.key.toLowerCase() === 'h') selectTab('biology'); // quick shortcuts
+      if (e.key.toLowerCase() === 'h') selectTab('biology');
       if (e.key.toLowerCase() === 'c') selectTab('chemistry');
       if (e.key.toLowerCase() === 'a') selectTab('anatomy');
       if (e.key.toLowerCase() === 'p') selectTab('physical');
@@ -351,7 +351,6 @@
       const p = document.createElement('div'); p.className = 'desc'; p.textContent = desc;
       panel.appendChild(h2); panel.appendChild(p);
 
-      // A11y controls: pause/play + reset + export
       const a11y = document.createElement('div');
       a11y.className = 'a11y-controls';
       const playBtn = makeButton('Play', 'primary');
@@ -370,23 +369,19 @@
       resetBtn.setAttribute('aria-label', 'Reset simulation');
       exportBtn.setAttribute('aria-label', 'Export data as CSV');
 
-      // Controls row
       const controls = document.createElement('div');
       controls.className = 'controls';
       panel.appendChild(controls);
 
-      // Notes
       const notes = document.createElement('div');
       notes.className = 'notes';
       panel.appendChild(notes);
 
-      // Quiz
       const quiz = document.createElement('div');
       quiz.className = 'quiz';
       quiz.innerHTML = `<h3>Quiz: Check your understanding</h3><div class="q"></div><div class="feedback" aria-live="polite"></div><div class="celebrate"></div>`;
       panel.appendChild(quiz);
 
-      // Wire actions
       panel._controls = controls;
       panel._playBtn = playBtn;
       panel._pauseBtn = pauseBtn;
@@ -495,7 +490,7 @@
         "biology"
       );
       const controls = panel._controls;
-      let a = 0.8, b = 0.02, c = 0.6, d = 0.015; // parameters
+      let a = 0.8, b = 0.02, c = 0.6, d = 0.015;
       addSlider(controls, "Prey birth rate (a)", 0.2, 1.5, 0.05, a, v => a = v);
       addSlider(controls, "Hunt rate (b)", 0.005, 0.05, 0.005, b, v => b = v);
       addSlider(controls, "Predator death rate (c)", 0.2, 1.2, 0.05, c, v => c = v);
@@ -527,13 +522,10 @@
         ctx.strokeStyle = '#223154'; ctx.lineWidth = 1.2;
         ctx.beginPath(); ctx.moveTo(40, 20); ctx.lineTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
         const yScale = (v) => 320 - v * (280/200);
-        // prey
         ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2; ctx.beginPath();
         trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.prey); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-        // pred
         ctx.strokeStyle = '#ff8a66'; ctx.lineWidth = 2; ctx.beginPath();
         trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.pred); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
-        // legend
         const legend = panel.querySelector('.legend') || (() => {
           const l = document.createElement('div'); l.className = 'legend'; l.innerHTML =
             '<span><i class="a"></i>Prey</span><span><i class="b"></i>Predators</span>';
@@ -588,9 +580,9 @@
         };
         svg.appendChild(g('rect', { x:0,y:0,width:960,height:340, fill:'#0c1328' }));
 
-        const EaBase = 80; // arbitrary units
+        const EaBase = 80;
         const Ea = EaBase * (1 - 0.6 * catalyst);
-        const k = Math.exp(-Ea / (0.001 * temp)); // toy Arrhenius-like
+        const k = Math.exp(-Ea / (0.001 * temp));
 
         const path = [];
         for (let x=0; x<=940; x+=10) {
@@ -616,7 +608,6 @@
       panel._pauseBtn.addEventListener('click', () => {});
       panel._resetBtn.addEventListener('click', () => { temp = 300; catalyst = 0; draw(); });
       panel._exportBtn.addEventListener('click', () => {
-        // Export sampled profile
         const rows = [];
         for (let x=0; x<=940; x+=10) {
           const progress = x/940;
@@ -666,14 +657,12 @@
 
       function draw() {
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        // outline
         ctx.fillStyle = '#1a2650'; ctx.strokeStyle = '#2a3a63';
         ctx.beginPath(); ctx.moveTo(canvas.width*0.5, 60);
         ctx.bezierCurveTo(canvas.width*0.3, 80, canvas.width*0.25, 240, canvas.width*0.45, 300);
         ctx.bezierCurveTo(canvas.width*0.55, 240, canvas.width*0.7, 80, canvas.width*0.5, 60);
         ctx.fill(); ctx.stroke();
 
-        // waveform
         const breathsPerSec = rate/60;
         const tidal = depth * vitalCapacity;
         const volume = residual + tidal * (0.5*(Math.sin(2*Math.PI*breathsPerSec*t) + 1));
@@ -738,7 +727,7 @@
         const rad = angle * Math.PI/180;
         const vx = speed * Math.cos(rad);
         const vy = speed * Math.sin(rad);
-        const scale = 6; // px per meter
+        const scale = 6;
         let x = 0, y = 0, t = 0, started = false;
         while (y >= 0 && x < canvas.width/scale && t < 10) {
           const px = 40 + x*scale;
@@ -965,5 +954,90 @@
       const controls = panel._controls;
       let beta = 0.9, gamma = 0.2, N = 1000;
       addSlider(controls, "Transmission (β)", 0.1, 1.5, 0.05, beta, v => beta = v);
-      addSlider(controls, "Recovery (γ)", 0.05, 0.8, 0.05, gamma, v => gamma
+      addSlider(controls, "Recovery (γ)", 0.05, 0.8, 0.05, gamma, v => gamma = v);
 
+      const canvas = document.createElement('canvas');
+      canvas.className = 'grid-bg';
+      canvas.setAttribute('role','img');
+      canvas.setAttribute('aria-label','SIR epidemic curve showing susceptible, infected, recovered');
+      panel.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = canvas.clientWidth; canvas.height = 340; } resize(); window.addEventListener('resize', resize);
+
+      let S = N - 1, I = 1, R = 0, running = true;
+      const trail = [];
+
+      function step() {
+        const dS = -beta * S * I / N;
+        const dI = beta * S * I / N - gamma * I;
+        const dR = gamma * I;
+        S += dS; I += dI; R += dR;
+        S = Math.max(0, S); I = Math.max(0, I); R = Math.max(0, R);
+        trail.push({ S, I, R });
+        if (trail.length > 900) trail.shift();
+      }
+
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.strokeStyle = '#223154'; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(40, 20); ctx.lineTo(40, 320); ctx.lineTo(canvas.width-20, 320); ctx.stroke();
+        
+        const yScale = (v) => 320 - v * (280/N);
+        
+        ctx.strokeStyle = '#66e0ff'; ctx.lineWidth = 2; ctx.beginPath();
+        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.S); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
+        
+        ctx.strokeStyle = '#ff8a66'; ctx.lineWidth = 2; ctx.beginPath();
+        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.I); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
+        
+        ctx.strokeStyle = '#59d36c'; ctx.lineWidth = 2; ctx.beginPath();
+        trail.forEach((pt,i)=>{ const x = 40 + i*(canvas.width-60)/900; const y = yScale(pt.R); i?ctx.lineTo(x,y):ctx.moveTo(x,y); }); ctx.stroke();
+
+        const legend = panel.querySelector('.legend') || (() => {
+          const l = document.createElement('div'); l.className = 'legend'; l.innerHTML =
+            '<span><i class="a"></i>Susceptible</span><span><i class="b"></i>Infected</span><span><i class="g"></i>Recovered</span>';
+          panel.appendChild(l); return l;
+        })();
+
+        if (running) step();
+        requestAnimationFrame(draw);
+      }
+      draw();
+
+      panel._playBtn.addEventListener('click', () => { running = true; markInteraction('biomedical'); });
+      panel._pauseBtn.addEventListener('click', () => { running = false; });
+      panel._resetBtn.addEventListener('click', () => { S = N - 1; I = 1; R = 0; trail.length = 0; });
+      panel._exportBtn.addEventListener('click', () => {
+        const rows = trail.map((pt, i) => [i, pt.S.toFixed(1), pt.I.toFixed(1), pt.R.toFixed(1)]);
+        exportCSV('biomedical_epidemic.csv', ['t_day','susceptible','infected','recovered'], rows);
+      });
+
+      addNotes(panel, [
+        { title: 'SIR model', text: 'Populations move from Susceptible → Infected → Recovered.', try: 'Increase transmission to see a sharper peak.' },
+        { title: 'Flattening the curve', text: 'Higher recovery (γ) or lower transmission (β) reduces peak infected.', try: 'Raise recovery rate and watch the infected curve flatten.' }
+      ]);
+      setupQuiz(panel,
+        'In an SIR model, reducing transmission (β) primarily:',
+        ['Speeds disease spread', 'Flattens and delays the infected peak', 'Eliminates recovery', 'Has no effect'],
+        1
+      );
+    }
+
+    /* ===========================
+       Panel registry
+       =========================== */
+    const panels = {
+      biology: biologyPanel,
+      chemistry: chemistryPanel,
+      anatomy: anatomyPanel,
+      physical: physicalPanel,
+      marine: marinePanel,
+      earth: earthPanel,
+      biomedical: biomedicalPanel
+    };
+
+    // Initialize with first panel
+    selectTab('biology');
+  </script>
+</body>
+</html>
